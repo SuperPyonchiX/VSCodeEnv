@@ -99,19 +99,9 @@ task.prompt.md
 ```yaml
 ---
 description: '具体的なタスクの説明（シングルクォート必須）'
-mode: 'ask' # または 'edit' または 'agent'
-tools: ['search', 'fetch', 'create', 'edit'] # 最小限のツール
-model: 'Claude Sonnet 4' # オプション: 特定のモデルが必要な場合
+mode: '[descriptive-name]'
 ---
 ```
-
-### モード選択基準
-
-| モード | 使用条件 | 権限レベル | 例 |
-|--------|---------|-----------|-----|
-| `ask` | 情報提供のみ、コード変更なし | 読み取り専用 | コード分析、質問応答 |
-| `edit` | ファイル編集・作成が必要 | 読み書き | コード生成、リファクタリング |
-| `agent` | 複雑な自律タスク | 最大権限 | エンドツーエンドの実装 |
 
 ### 必須セクション
 
@@ -238,8 +228,7 @@ database-optimization-advisor.agent.md
 ```yaml
 ---
 description: 'エージェントの役割と専門性（シングルクォート必須）'
-tools: ['vscode', 'edit', 'search', 'fetch'] # エージェントが使用するツール
-model: 'Claude Sonnet 4' # オプション: 推奨モデル
+tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/*', 'agents', 'todo'] # エージェントが使用するツール
 ---
 ```
 
@@ -317,7 +306,6 @@ model: 'Claude Sonnet 4' # オプション: 推奨モデル
 ### プロンプトファイル
 
 - [ ] `description` フィールドがシングルクォートで囲まれている
-- [ ] `mode` が `ask`, `edit`, `agent` のいずれかである
 - [ ] `tools` が必要最小限に制限されている
 - [ ] ワークフローが明確でステップバイステップである
 - [ ] 出力期待値が具体的である
@@ -359,8 +347,7 @@ model: 'Claude Sonnet 4' # オプション: 推奨モデル
 ```yaml
 ---
 description: 'RESTful APIエンドポイントとハンドラーを生成'
-mode: 'edit'
-tools: ['search', 'fetch', 'create', 'edit']
+mode: 'api-architect'
 ---
 ```
 
@@ -382,8 +369,7 @@ applyTo: '**/api/**/*.ts, **/routes/**/*.ts'
 ```yaml
 ---
 description: 'API設計とアーキテクチャの専門家エージェント'
-tools: ['vscode', 'edit', 'search', 'fetch']
-model: 'Claude Sonnet 4'
+tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/*', 'agents', 'todo']
 ---
 ```
 

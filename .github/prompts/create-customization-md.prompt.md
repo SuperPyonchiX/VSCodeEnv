@@ -27,13 +27,14 @@ mode: 'create-customization-md'
 
 ### ステップ 2: ファイル生成
 1. **プロンプト**: `.github/prompts/[動詞-名詞].prompt.md` を作成
-   - `mode`: `ask` / `edit` / `agent` から選択
+   - `mode`: 生成するエージェントファイル名(拡張子なし)を指定
    - `tools`: 最小限のツールのみ指定
    
 2. **インストラクション**: `.github/instructions/[技術名-用途].instructions.md` を作成
    - `applyTo`: 適用対象のglobパターン指定
    
 3. **エージェント**: `.github/agents/[領域-役割].agent.md` を作成
+   - ファイル名はプロンプトの `mode` と一致させる
    - ペルソナと専門性を明確に定義
 
 ### ステップ 3: 統合と検証
