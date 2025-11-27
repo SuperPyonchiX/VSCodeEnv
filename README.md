@@ -91,8 +91,7 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | [create-readme.prompt.md](.github/prompts/create-readme.prompt.md) | 包括的なREADME.mdファイルを生成 | `#file:.github/prompts/create-readme.prompt.md` |
 | [create-typescript-mcp-server.prompt.md](.github/prompts/create-typescript-mcp-server.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/create-typescript-mcp-server.prompt.md` |
 | [github-copilot-starter.prompt.md](.github/prompts/github-copilot-starter.prompt.md) | GitHub Copilotの使用を開始するためのガイド | `#file:.github/prompts/github-copilot-starter.prompt.md` |
-| [prompt-builder.prompt.md](.github/prompts/create-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成（レガシー） | `#file:.github/prompts/prompt-builder.prompt.md` |
-
+| [prompt-builder.prompt.md](.github/prompts/create-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成（レガシー） | `#file:.github/prompts/prompt-builder.prompt.md` || [review-cpp14-code.prompt.md](.github/prompts/review-cpp14-code.prompt.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー実行(Git差分対応) | `#file:.github/prompts/review-cpp14-code.prompt.md` |
 ### 📋 インストラクションファイル
 
 インストラクションファイルは、特定のファイルタイプに自動的に適用されるルールを定義します。
@@ -123,6 +122,7 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | [create-python-mcp-server.agent.md](.github/agents/create-python-mcp-server.agent.md) | Python MCPサーバー開発の専門家 | `@create-python-mcp-server` |
 | [create-typescript-mcp-server.agent.md](.github/agents/create-typescript-mcp-server.agent.md) | TypeScript MCPサーバー開発の専門家 | `@create-typescript-mcp-server` |
 | [prompt-builder.agent.md](.github/agents/prompt-builder.agent.md) | プロンプトエンジニアリングとプロンプト検証システム | `@prompt-builder` |
+| [review-cpp14-code.agent.md](.github/agents/review-cpp14-code.agent.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー専門家(Git差分対応) | `@review-cpp14-code` |
 | [software-engineer.agent.md](.github/agents/software-engineer.agent.md) | 包括的なソフトウェアエンジニアリング支援 | `@software-engineer` |
 
 ### ⚙️ その他のカスタマイゼーション
