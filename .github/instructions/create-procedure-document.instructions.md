@@ -325,8 +325,8 @@ docker run -d -p 8080:80 nginx
 
 ## 🔗 関連リソース
 
-- [プロンプト: 手順書生成](../prompts/generate-procedure-document.prompt.md)
-- [エージェント: テクニカルライター](../agents/technical-writer-assistant.agent.md)
+- [プロンプト: 手順書生成](../prompts/create-procedure-document.prompt.md)
+- [エージェント: テクニカルライター](../agents/create-procedure-document.agent.md)
 - [Markdown記法ガイド](./markdown.instructions.md)
 
 ## 📚 参考文献

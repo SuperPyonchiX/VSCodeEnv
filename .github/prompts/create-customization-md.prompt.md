@@ -26,14 +26,17 @@ mode: 'create-customization-md'
    - **エージェント**: 対話的な専門知識の提供
 
 ### ステップ 2: ファイル生成
-1. **プロンプト**: `.github/prompts/[動詞-名詞].prompt.md` を作成
+1. **プロンプト**: `.github/prompts/[ベース名].prompt.md` を作成
+   - 命名: `create-*`, `analyze-*`, `refactor-*`, `optimize-*`
    - `mode`: 生成するエージェントファイル名(拡張子なし)を指定
-   - `tools`: 最小限のツールのみ指定
-   
-2. **インストラクション**: `.github/instructions/[技術名-用途].instructions.md` を作成
-   - `applyTo`: 適用対象のglobパターン指定
-   
-3. **エージェント**: `.github/agents/[領域-役割].agent.md` を作成
+   - `tools`: 必要最小限のツールのみ指定
+
+2. **インストラクション**: `.github/instructions/[ベース名].instructions.md` を作成
+   - **プロンプトと同じベース名を使用**
+   - `applyTo`: 適用対象のglobパターンを指定
+
+3. **エージェント**: `.github/agents/[ベース名].agent.md` を作成
+   - **プロンプトと同じベース名を使用**
    - ファイル名はプロンプトの `mode` と一致させる
    - ペルソナと専門性を明確に定義
 
@@ -76,7 +79,7 @@ mode: 'create-customization-md'
 **入力**: "REST APIの開発を効率化したい"
 
 **生成ファイル**:
-1. `generate-api-endpoints.prompt.md` - APIエンドポイント生成
-2. `rest-api-standards.instructions.md` - RESTful API設計ガイドライン
-3. `api-architect.agent.md` - API設計の専門家
+1. `create-api-endpoints.prompt.md` - APIエンドポイント生成
+2. `create-api-endpoints.instructions.md` - RESTful API設計ガイドライン
+3. `create-api-endpoints.agent.md` - API設計の専門家
 

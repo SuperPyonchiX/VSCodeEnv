@@ -1,5 +1,5 @@
 ---
-mode: 'agent'
+mode: 'create-typescript-mcp-server'
 description: 'ツール、リソース、適切な設定を持つ完全なTypeScriptのMCPサーバープロジェクトを生成'
 ---
 

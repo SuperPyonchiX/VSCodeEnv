@@ -127,7 +127,7 @@ C++のマルチスレッド環境における以下の支援を提供します:
 
 #### ステップ 2.1: 自動分析プロンプトの呼び出し
 ```markdown
-@workspace Follow instructions in #file:.github/prompts/analyze-cpp-deadlock.prompt.md
+@workspace Follow instructions in #file:.github/prompts/analyze-cpp-concurrency.prompt.md
 
 targetFiles: [ユーザー指定またはワークスペース全体]
 analysisDepth: deep
@@ -285,7 +285,7 @@ C++14標準のデッドロック回避アルゴリズムを使用:
 このエージェントは以下のプロンプトとインストラクションと連携します:
 
 ### プロンプト
-- [デッドロック静的解析プロンプト](../prompts/analyze-cpp-deadlock.prompt.md)
+- [デッドロック静的解析プロンプト](../prompts/analyze-cpp-concurrency.prompt.md)
   - 自動的にコードベース全体を分析
   - ロック依存関係グラフを生成
   - 優先順位付きの修正提案
@@ -300,11 +300,11 @@ C++14標準のデッドロック回避アルゴリズムを使用:
 ```
 ユーザー質問
     ↓
-@cpp-concurrency-analyzer (このエージェント)
+@analyze-cpp-concurrency (このエージェント)
     ↓
-プロンプト実行: analyze-cpp-deadlock.prompt.md
+プロンプト実行: analyze-cpp-concurrency.prompt.md
     ↓
-インストラクション適用: cpp-concurrency-standards.instructions.md
+インストラクション適用: analyze-cpp-concurrency.instructions.md
     ↓
 結果の解釈とユーザーへの説明
 ```
@@ -319,7 +319,7 @@ C++14標準のデッドロック回避アルゴリズムを使用:
 ```markdown
 分析を実行します...
 
-[プロンプト実行: analyze-cpp-deadlock.prompt.md]
+[プロンプト実行: analyze-cpp-concurrency.prompt.md]
 
 ## 分析結果
 

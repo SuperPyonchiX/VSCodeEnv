@@ -1,8 +1,6 @@
 ---
 description: 'C++14コードの排他制御を分析してデッドロックシナリオを検出し、修正案を提示'
-mode: 'ask'
-tools: ['read_file', 'grep_search', 'semantic_search', 'list_code_usages']
-model: 'Claude Sonnet 4'
+mode: 'analyze-cpp-concurrency'
 ---
 
 # C++ デッドロック静的解析
@@ -448,7 +446,7 @@ graph LR
 
 ### 内部ガイドライン
 - [C++ 並行処理コーディング標準](../instructions/cpp-concurrency-standards.instructions.md)
-- [C++ 並行処理アナライザーエージェント](../agents/cpp-concurrency-analyzer.agent.md)
+- [C++ 並行処理アナライザーエージェント](../agents/analyze-cpp-concurrency.agent.md)
 
 ### C++ 標準とベストプラクティス
 - [C++ Core Guidelines: CP (Concurrency and Parallelism)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-concurrency)
@@ -463,14 +461,14 @@ graph LR
 
 ### 例1: 単一ファイルの分析
 ```
-@workspace Follow instructions in #file:.github/prompts/analyze-cpp-deadlock.prompt.md
+@workspace Follow instructions in #file:.github/prompts/analyze-cpp-concurrency.prompt.md
 
 targetFiles: src/bank_account.cpp
 ```
 
 ### 例2: ディレクトリ全体の分析
 ```
-@workspace Follow instructions in #file:.github/prompts/analyze-cpp-deadlock.prompt.md
+@workspace Follow instructions in #file:.github/prompts/analyze-cpp-concurrency.prompt.md
 
 targetFiles: src/concurrent/
 analysisDepth: exhaustive
@@ -479,12 +477,12 @@ outputFormat: mermaid
 
 ### 例3: ワークスペース全体の分析
 ```
-@workspace Follow instructions in #file:.github/prompts/analyze-cpp-deadlock.prompt.md
+@workspace Follow instructions in #file:.github/prompts/analyze-cpp-concurrency.prompt.md
 
 analysisDepth: deep
 ```
 
 ### 例4: エージェントと連携
 ```
-@cpp-concurrency-analyzer Analyze the codebase for potential deadlocks and suggest fixes
+@analyze-cpp-concurrency Analyze the codebase for potential deadlocks and suggest fixes
 ```

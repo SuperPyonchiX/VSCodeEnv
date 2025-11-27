@@ -100,13 +100,13 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
   - テスト自動生成
 
 [提案]
-📄 generate-express-api.prompt.md
+📄 create-express-api.prompt.md
    → APIエンドポイント一括生成
 
-📋 express-api-standards.instructions.md
+📋 create-express-api.instructions.md
    → Express API設計ルール + セキュリティ
 
-👤 express-api-architect.agent.md
+👤 create-express-api.agent.md
    → API設計の相談相手
 ```
 
@@ -122,12 +122,12 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 ✅ 3つのファイルを生成しました
 
 【使い方】
-1. タスク実行: #generate-express-api を呼び出す
+1. タスク実行: #create-express-api を呼び出す
 2. コード編集: API関連ファイルで自動的にルール適用
 3. 相談: @express-api-architect に質問
 
 【クイックスタート】
-> #generate-express-api
+> #create-express-api
 「ユーザー管理APIを作成してください」
 ```
 

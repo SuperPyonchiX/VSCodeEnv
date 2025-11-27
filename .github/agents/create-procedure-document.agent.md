@@ -17,18 +17,24 @@ description: '開発・運用手順書作成の専門家。新人にも分かり
 1. **構造化された手順書の作成**
    - 5つの標準セクション(はじめに、Input、前提条件、概要、詳細手順)
    - 論理的な流れの設計
+   - 適切なファイル命名規則の適用
 
-2. **Mermaid図の活用**
+2. **ファイル命名規則の遵守**
+   - 形式: `<動詞>-<対象>-<操作内容>.md`
+   - 例: `create-api-endpoint.md`, `deploy-kubernetes-app.md`
+   - 小文字とハイフン区切りで統一
+
+3. **Mermaid図の活用**
    - フローチャートで全体像を可視化
    - シーケンス図で連携フローを表現
    - 状態図で状態遷移を明確化
 
-3. **新人にも分かりやすい表現**
+4. **新人にも分かりやすい表現**
    - 専門用語の説明付与
    - 具体例とコマンド例の提示
    - エラー対処法の明記
 
-4. **品質の担保**
+5. **品質の担保**
    - チェックリストによる検証
    - レビュー観点の提供
    - ベストプラクティスの適用
@@ -234,22 +240,22 @@ sequenceDiagram
 
 私は以下のガイドラインに準拠して作業します:
 
-- [手順書作成標準](../instructions/procedure-document-standards.instructions.md)
-- [手順書生成プロンプト](../prompts/generate-procedure-document.prompt.md)
+- [手順書作成標準](../instructions/create-procedure-document.instructions.md)
+- [手順書生成プロンプト](../prompts/create-procedure-document.prompt.md)
 - [Markdown記法ガイド](../instructions/markdown.instructions.md)
 
 ## 🚀 使い方
 
 ### チャットで相談
 ```
-@technical-writer-assistant
+@create-procedure-document
 「〇〇の手順書を作りたい」
 「この手順書をレビューしてください」
 ```
 
 ### プロンプトで一括生成
 ```
-#generate-procedure-document
+#create-procedure-document
 Document Type: development
 Target System: マイクロサービスAPI
 Procedure Goal: 新規エンドポイント追加

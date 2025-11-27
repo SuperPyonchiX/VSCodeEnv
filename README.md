@@ -80,13 +80,13 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | プロンプト | 説明 | 使用方法 |
 |--------|------|--------|
 | [create-readme.prompt.md](.github/prompts/create-readme.prompt.md) | 包括的なREADME.mdファイルを生成 | `#file:.github/prompts/create-readme.prompt.md` |
-| [typescript-mcp-server-generator.prompt.md](.github/prompts/typescript-mcp-server-generator.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/typescript-mcp-server-generator.prompt.md` |
-| [python-mcp-server-generator.prompt.md](.github/prompts/python-mcp-server-generator.prompt.md) | Python MCPサーバープロジェクトを作成 | `#file:.github/prompts/python-mcp-server-generator.prompt.md` |
+| [create-typescript-mcp-server.prompt.md](.github/prompts/create-typescript-mcp-server.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/create-typescript-mcp-server.prompt.md` |
+| [create-python-mcp-server.prompt.md](.github/prompts/create-python-mcp-server.prompt.md) | Python MCPサーバープロジェクトを作成 | `#file:.github/prompts/create-python-mcp-server.prompt.md` |
 | [create-customization-md.prompt.md](.github/prompts/create-customization-md.prompt.md) | プロンプト/インストラクション/エージェントを統合的に生成 | `#file:.github/prompts/create-customization-md.prompt.md` |
 | [create-procedure-document.prompt.md](.github/prompts/create-procedure-document.prompt.md) | Mermaid図付きの開発・運用手順書を生成 | `#file:.github/prompts/create-procedure-document.prompt.md` |
 | [prompt-builder.prompt.md](.github/prompts/prompt-builder.prompt.md) | 高品質なプロンプトファイルを作成 | `#file:.github/prompts/prompt-builder.prompt.md` |
 | [documentation-writer.prompt.md](.github/prompts/documentation-writer.prompt.md) | 技術ドキュメントを作成 | `#file:.github/prompts/documentation-writer.prompt.md` |
-| [analyze-cpp-deadlock.prompt.md](.github/prompts/analyze-cpp-deadlock.prompt.md) | C++14コードの排他制御を分析してデッドロックを検出 | `#file:.github/prompts/analyze-cpp-deadlock.prompt.md` |
+| [analyze-cpp-concurrency.prompt.md](.github/prompts/analyze-cpp-concurrency.prompt.md) | C++並行処理の排他制御を分析してデッドロックを検出 | `#file:.github/prompts/analyze-cpp-concurrency.prompt.md` |
 
 ### 📋 インストラクションファイル
 
@@ -95,13 +95,13 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | インストラクション | 適用対象 | 説明 |
 |---------------|---------|------|
 | [python.instructions.md](.github/instructions/python.instructions.md) | `**/*.py` | Python開発のコーディング規約とベストプラクティス |
-| [typescript-mcp-server.instructions.md](.github/instructions/typescript-mcp-server.instructions.md) | `**/*.ts, **/*.js` | TypeScript MCPサーバー開発ガイドライン |
-| [python-mcp-server.instructions.md](.github/instructions/python-mcp-server.instructions.md) | `**/*.py` | Python MCPサーバー開発ガイドライン |
+| [create-typescript-mcp-server.instructions.md](.github/instructions/create-typescript-mcp-server.instructions.md) | `**/*.ts, **/*.js` | TypeScript MCPサーバー開発ガイドライン |
+| [create-python-mcp-server.instructions.md](.github/instructions/create-python-mcp-server.instructions.md) | `**/*.py` | Python MCPサーバー開発ガイドライン |
 | [markdown.instructions.md](.github/instructions/markdown.instructions.md) | `**/*.md` | Markdown記述とドキュメント作成標準 |
-| [procedure-document-standards.instructions.md](.github/instructions/procedure-document-standards.instructions.md) | `**/procedures/**/*.md, **/*-procedure.md, **/*-manual.md` | 開発・運用手順書のMarkdown作成ルールと品質基準 |
+| [create-procedure-document.instructions.md](.github/instructions/create-procedure-document.instructions.md) | `**/procedures/**/*.md, **/*-procedure.md, **/*-manual.md` | 開発・運用手順書のMarkdown作成ルールと品質基準 |
 | [prompt.instructions.md](.github/instructions/prompt.instructions.md) | `**/*.prompt.md` | 高品質なプロンプトファイル作成ガイドライン |
 | [instructions.instructions.md](.github/instructions/instructions.instructions.md) | `**/*.instructions.md` | インストラクションファイル作成ガイドライン |
-| [cpp-concurrency-standards.instructions.md](.github/instructions/cpp-concurrency-standards.instructions.md) | `**/*.cpp, **/*.hpp, **/*.h` | C++14/17並行処理のベストプラクティスとデッドロック回避標準 |
+| [analyze-cpp-concurrency.instructions.md](.github/instructions/analyze-cpp-concurrency.instructions.md) | `**/*.cpp, **/*.hpp, **/*.h` | C++14/17並行処理のベストプラクティスとデッドロック回避標準 |
 
 ### 🤖 エージェントファイル
 
@@ -109,12 +109,12 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 
 | エージェント | 説明 | 呼び出し方法 |
 |---------|------|----------|
-| [typescript-mcp-expert.agent.md](.github/agents/typescript-mcp-expert.agent.md) | TypeScript MCPサーバー開発の専門家 | `@typescript-mcp-expert` |
-| [python-mcp-expert.agent.md](.github/agents/python-mcp-expert.agent.md) | Python MCPサーバー開発の専門家 | `@python-mcp-expert` |
+| [create-typescript-mcp-server.agent.md](.github/agents/create-typescript-mcp-server.agent.md) | TypeScript MCPサーバー開発の専門家 | `@create-typescript-mcp-server` |
+| [create-python-mcp-server.agent.md](.github/agents/create-python-mcp-server.agent.md) | Python MCPサーバー開発の専門家 | `@create-python-mcp-server` |
 | [prompt-builder.agent.md](.github/agents/prompt-builder.agent.md) | プロンプトエンジニアリングとプロンプト検証システム | `@prompt-builder` |
-| [technical-writer-assistant.agent.md](.github/agents/technical-writer-assistant.agent.md) | 開発・運用手順書作成の専門家 | `@technical-writer-assistant` |
+| [create-procedure-document.agent.md](.github/agents/create-procedure-document.agent.md) | 開発・運用手順書作成の専門家 | `@create-procedure-document` |
 | [software-engineer-agent-v1.agent.md](.github/agents/software-engineer-agent-v1.agent.md) | 包括的なソフトウェアエンジニアリング支援 | `@software-engineer` |
-| [cpp-concurrency-analyzer.agent.md](.github/agents/cpp-concurrency-analyzer.agent.md) | C++並行処理のデッドロック分析と最適化専門家 | `@cpp-concurrency-analyzer` |
+| [analyze-cpp-concurrency.agent.md](.github/agents/analyze-cpp-concurrency.agent.md) | C++並行処理のデッドロック分析と最適化専門家 | `@analyze-cpp-concurrency` |
 | [Thinking-Beast-Mode.agent.md](.github/agents/Thinking-Beast-Mode.agent.md) | 深い思考プロセスを持つ高度なエージェント | `@thinking-beast` |
 
 ### ⚙️ その他のカスタマイゼーション
@@ -134,7 +134,7 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 または、特定のコンテキストで:
 
 ```
-Create a new TypeScript MCP server following #file:.github/prompts/typescript-mcp-server-generator.prompt.md
+Create a new TypeScript MCP server following #file:.github/prompts/create-typescript-mcp-server.prompt.md
 ```
 
 ### エージェントの使用
@@ -142,7 +142,7 @@ Create a new TypeScript MCP server following #file:.github/prompts/typescript-mc
 エージェントを呼び出すには、チャットで `@` に続けてエージェント名を入力します:
 
 ```
-@typescript-mcp-expert Help me create a new MCP server with file system tools
+@create-typescript-mcp-server Help me create a new MCP server with file system tools
 ```
 
 ```

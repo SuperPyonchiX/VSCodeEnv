@@ -1,6 +1,5 @@
 ---
 mode: 'agent'
-model: Claude Sonnet 4
 tools: ['edit', 'githubRepo', 'changes', 'problems', 'search', 'runCommands', 'fetch']
 description: '技術スタックに基づいて新しいプロジェクトの完全なGitHub Copilot設定をセットアップ'
 ---

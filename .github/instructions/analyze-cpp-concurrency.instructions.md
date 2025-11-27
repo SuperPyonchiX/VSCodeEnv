@@ -758,8 +758,8 @@ TEST(ThreadSafeQueueTest, ConcurrentPushPop) {
 ## 関連リソース
 
 ### 内部リソース
-- [C++ デッドロック分析プロンプト](../prompts/analyze-cpp-deadlock.prompt.md)
-- [C++ 並行処理アナライザー](../agents/cpp-concurrency-analyzer.agent.md)
+- [C++ デッドロック分析プロンプト](../prompts/analyze-cpp-concurrency.prompt.md)
+- [C++ 並行処理アナライザー](../agents/analyze-cpp-concurrency.agent.md)
 
 ### 外部リソース
 - [C++ Core Guidelines: Concurrency](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-concurrency)

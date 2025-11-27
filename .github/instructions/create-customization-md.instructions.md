@@ -76,13 +76,13 @@ applyTo: '**/*.prompt.md, **/*.instructions.md, **/*.agent.md'
 
 ### 命名規則
 
-- **動詞で始める**: `generate-`, `analyze-`, `refactor-`, `optimize-`
+- **動詞で始める**: `create-`, `analyze-`, `refactor-`, `optimize-`
 - **ケバブケース**: 小文字とハイフンのみ使用
 - **説明的**: ファイル名からタスクが明確に理解できる
 
 **良い例**:
 ```
-generate-api-tests.prompt.md
+create-api-tests.prompt.md
 analyze-performance-bottlenecks.prompt.md
 refactor-legacy-code.prompt.md
 ```
@@ -138,15 +138,15 @@ mode: '[descriptive-name]'
 
 ### 命名規則
 
-- **技術/言語名を含む**: `typescript-`, `react-`, `python-`, `api-`
-- **内容を示す**: `-best-practices`, `-standards`, `-conventions`, `-guidelines`
+- **プロンプトと同じベース名**: 対応するプロンプトファイルと同じベース名を使用
 - **ケバブケース**: 小文字とハイフンのみ
+- **拡張子のみ変更**: `.prompt.md` → `.instructions.md`
 
-**良い例**:
+**良い例** (プロンプトが `create-api-endpoints.prompt.md` の場合):
 ```
-typescript-coding-standards.instructions.md
-react-component-guidelines.instructions.md
-api-security-best-practices.instructions.md
+create-api-endpoints.instructions.md
+analyze-performance-bottlenecks.instructions.md
+refactor-legacy-code.instructions.md
 ```
 
 ### フロントマター要件
@@ -212,15 +212,15 @@ function getUser(id: any): any {
 
 ### 命名規則
 
-- **専門領域を示す**: 技術名や領域名を含む
-- **役割を示す接尾辞**: `-expert`, `-specialist`, `-optimizer`, `-architect`, `-advisor`
+- **プロンプトと同じベース名**: 対応するプロンプトファイルと同じベース名を使用
 - **ケバブケース**: 小文字とハイフンのみ
+- **拡張子のみ変更**: `.prompt.md` → `.agent.md`
 
-**良い例**:
+**良い例** (プロンプトが `create-api-endpoints.prompt.md` の場合):
 ```
-react-performance-expert.agent.md
-api-security-specialist.agent.md
-database-optimization-advisor.agent.md
+create-api-endpoints.agent.md
+analyze-performance-bottlenecks.agent.md
+refactor-legacy-code.agent.md
 ```
 
 ### フロントマター要件
@@ -229,8 +229,147 @@ database-optimization-advisor.agent.md
 ---
 description: 'エージェントの役割と専門性（シングルクォート必須）'
 tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/*', 'agents', 'todo'] # エージェントが使用するツール
+handoffs: # オプション: 他のエージェントへの遷移定義
+  - label: '実装を開始'
+    agent: 'implementation'
+    prompt: '上記の計画を実装してください。'
+    send: false
 ---
 ```
+
+### handoffs フィールドの詳細
+
+handoffsは、エージェント間のシームレスな遷移を可能にする機能です。チャット応答の完了後、次のステップとしてハンドオフボタンが表示され、ユーザーはワンクリックで関連するコンテキストを持って次のエージェントに移行できます。
+
+#### handoffs の各フィールド
+
+| フィールド | 必須 | 説明 | 例 |
+|----------|------|------|-----|
+| `label` | ✅ | ハンドオフボタンに表示されるテキスト | `'実装を開始'` |
+| `agent` | ✅ | 遷移先のエージェント識別子（ファイル名から.agent.mdを除いたもの） | `'implementation'` |
+| `prompt` | ✅ | 遷移先エージェントに送信するプロンプトテキスト | `'上記の計画を実装してください。'` |
+| `send` | ❌ | プロンプトを自動送信するか（デフォルト: `false`） | `false` |
+
+#### handoffs のユースケース
+
+handoffsは、以下のような段階的なワークフローを構築する際に特に有効です:
+
+1. **プランニング → 実装**
+   - 計画エージェントで実装計画を生成
+   - handoffボタンで実装エージェントに遷移
+   - 計画の内容が自動的に引き継がれる
+
+2. **実装 → レビュー**
+   - 実装完了後、コードレビューエージェントに遷移
+   - セキュリティや品質の問題をチェック
+
+3. **失敗テスト生成 → テスト合格実装**
+   - まず失敗するテストを生成（レビューしやすい）
+   - handoffで実装エージェントに遷移
+   - テストが合格するようにコードを実装
+
+#### handoffs の設計原則
+
+**DO: 推奨事項**
+- ✅ **論理的なフロー**: 自然な作業の流れに沿った遷移を設計
+- ✅ **明確なラベル**: 次のステップが一目でわかるボタンテキスト
+- ✅ **send: false を推奨**: ユーザーがプロンプトを確認・編集できるようにする
+- ✅ **コンテキストの継承**: 前のステップの情報を適切に引き継ぐプロンプト
+- ✅ **役割の分離**: 各エージェントの責任範囲を明確に分ける
+
+**DON'T: 避けるべき事項**
+- ❌ **send: true の乱用**: ユーザーの確認なしに自動実行するのは避ける
+- ❌ **循環参照**: エージェント間で無限ループを作らない
+- ❌ **過度に長いチェーン**: 5ステップ以上の長いワークフローは避ける
+- ❌ **曖昧なラベル**: 「次へ」「続ける」などの不明瞭なボタンテキスト
+
+#### handoffs の実装例
+
+**例1: 3段階のワークフロー**
+
+```yaml
+# planner.agent.md
+---
+description: '実装計画を生成'
+tools: ['search', 'fetch']
+handoffs:
+  - label: '実装を開始'
+    agent: 'implementation'
+    prompt: 'この計画に基づいて実装してください。'
+    send: false
+---
+```
+
+```yaml
+# implementation.agent.md
+---
+description: '計画に基づいて実装'
+tools: ['search', 'fetch', 'edit', 'create']
+handoffs:
+  - label: 'コードレビューを依頼'
+    agent: 'reviewer'
+    prompt: '実装されたコードをレビューしてください。'
+    send: false
+---
+```
+
+```yaml
+# reviewer.agent.md
+---
+description: 'セキュリティと品質をレビュー'
+tools: ['search', 'fetch']
+handoffs:
+  - label: '改善を実装'
+    agent: 'implementation'
+    prompt: 'レビュー結果に基づいて改善してください。'
+    send: false
+---
+```
+
+**例2: テスト駆動開発ワークフロー**
+
+```yaml
+# test-writer.agent.md
+---
+description: '失敗するテストを生成'
+tools: ['search', 'fetch', 'edit', 'create']
+handoffs:
+  - label: 'テストを合格させる'
+    agent: 'implementation'
+    prompt: '上記のテストが合格するように実装してください。'
+    send: false
+---
+```
+
+```yaml
+# implementation.agent.md
+---
+description: 'テストを合格させる実装'
+tools: ['search', 'fetch', 'edit', 'execute']
+handoffs:
+  - label: 'リファクタリング'
+    agent: 'refactoring'
+    prompt: 'テストが合格したので、コードをリファクタリングしてください。'
+    send: false
+  - label: '追加テストの作成'
+    agent: 'test-writer'
+    prompt: 'エッジケースをカバーする追加テストを作成してください。'
+    send: false
+---
+```
+
+#### handoffs と tools の連携
+
+handoffsを設計する際は、各エージェントのtools設定も考慮します:
+
+| エージェント | tools | handoffs先 | 理由 |
+|------------|-------|-----------|------|
+| **planner** | `['search', 'fetch']` | implementation | コード編集を防ぐ（読み取り専用） |
+| **implementation** | `['edit', 'create', 'search']` | reviewer | コード編集が可能 |
+| **reviewer** | `['search', 'fetch']` | implementation | レビューのみ（編集不可） |
+| **tester** | `['edit', 'create', 'execute']` | implementation | テスト作成と実行 |
+
+この設計により、各エージェントは必要最小限の権限のみを持ち、安全性と明確性が向上します。
 
 ### 必須セクション
 
@@ -270,15 +409,15 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 
 ### 内部ガイドライン
 - [TypeScript コーディング標準](../.github/instructions/typescript-standards.instructions.md)
-- [API アーキテクト エージェント](../.github/agents/api-architect.agent.md)
+- [TypeScript アーキテクト エージェント](../.github/agents/typescript-standards.agent.md)
 ```
 
 **インストラクションファイルから**:
 ```markdown
 ## 関連リソース
 
-- [API生成プロンプト](../.github/prompts/generate-api-endpoints.prompt.md)
-- [APIアーキテクトエージェント](../.github/agents/api-architect.agent.md)
+- [API生成プロンプト](../.github/prompts/create-api-endpoints.prompt.md)
+- [APIアーキテクトエージェント](../.github/agents/create-api-endpoints.agent.md)
 ```
 
 **エージェントファイルから**:
@@ -287,8 +426,8 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 
 このエージェントは以下のプロンプトとインストラクションと連携します:
 
-- #file:.github/prompts/generate-api-endpoints.prompt.md
-- #file:.github/instructions/api-standards.instructions.md
+- #file:.github/prompts/create-api-endpoints.prompt.md
+- #file:.github/instructions/create-api-endpoints.instructions.md
 ```
 
 ### 一貫した用語の使用
@@ -328,9 +467,12 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 - [ ] エージェントのペルソナが明確である
 - [ ] 専門知識が適切に定義されている
 - [ ] ワークフローが実用的である
-- [ ] ツールセットが適切である
+- [ ] ツールセットが適切である（最小権限の原則）
 - [ ] 使用例が具体的である
 - [ ] ファイル名がケバブケースで役割を示す
+- [ ] handoffsが設定されている場合、各フィールドが完全である
+- [ ] handoffsのラベルが明確で説明的である
+- [ ] handoffsの遷移先エージェントが適切である
 
 ### 統合チェック
 
@@ -339,10 +481,12 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 - [ ] 各ファイルの役割が明確に分担されている
 - [ ] 重複する内容がない
 - [ ] ユーザーの目的を適切に達成できる設計である
+- [ ] handoffsが論理的なワークフローを形成している（該当する場合）
+- [ ] handoffsの遷移先エージェントが存在する（該当する場合）
 
 ## 実装例: API開発支援
 
-### 1. プロンプトファイル: `generate-api-endpoints.prompt.md`
+### 1. プロンプトファイル: `create-api-endpoints.prompt.md`
 
 ```yaml
 ---
@@ -353,7 +497,7 @@ mode: 'api-architect'
 
 **役割**: 具体的なAPIコードを生成するタスク実行
 
-### 2. インストラクションファイル: `api-standards.instructions.md`
+### 2. インストラクションファイル: `create-api-endpoints.instructions.md`
 
 ```yaml
 ---
@@ -364,7 +508,7 @@ applyTo: '**/api/**/*.ts, **/routes/**/*.ts'
 
 **役割**: APIファイルを編集する際の継続的なガイダンス
 
-### 3. エージェントファイル: `api-architect.agent.md`
+### 3. エージェントファイル: `create-api-endpoints.agent.md`
 
 ```yaml
 ---
@@ -404,7 +548,7 @@ tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/
 
 1. **ユーザーに通知**: 既存ファイルの存在を明示
 2. **代替案を提案**: 
-   - より具体的な名前（例: `generate-rest-api.prompt.md` → `generate-express-rest-api.prompt.md`）
+   - より具体的な名前（例: `create-rest-api.prompt.md` → `create-express-rest-api.prompt.md`）
    - バージョン番号の追加（例: `api-standards-v2.instructions.md`）
 3. **更新の可否を確認**: 既存ファイルの更新を希望するか確認
 
