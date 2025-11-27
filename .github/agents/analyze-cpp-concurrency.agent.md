@@ -521,3 +521,291 @@ public:
 ---
 
 **準備完了です！** C++の並行処理に関する質問や、デッドロック分析のご依頼をお待ちしています。
+
+---
+
+## 📚 詳細ガイドライン: C++ 並行処理コーディング標準
+
+以下は、**C++14環境**におけるマルチスレッドプログラミングとmutex管理のベストプラクティスです。
+
+### 基本原則
+
+1. **RAII原則の厳守**: mutex管理には必ずRAIIラッパー（`lock_guard`, `unique_lock`）を使用
+2. **明示的なロック順序**: 複数のmutexを取得する場合、常に同じ順序で取得
+3. **最小特権の原則**: ロックの保持時間を最小限に抑える
+4. **デッドロック回避アルゴリズム**: 複数mutexには`std::lock` + `adopt_lock`を使用（C++14標準）
+5. **例外安全性**: すべてのロック操作は例外安全でなければならない
+6. **イベントドリブン安全性**: コールバック/シグナルハンドラー内でのロック取得に細心の注意
+
+### ✅ DO: 推奨されるパターン
+
+#### 1. 単一mutexのロック: std::lock_guard
+
+```cpp
+// ✅ GOOD: シンプルなスコープ付きロック
+class BankAccount {
+    mutable std::mutex mutex_;
+    double balance_;
+
+public:
+    void deposit(double amount) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        balance_ += amount;
+    } // mutexは自動的に解放される
+};
+```
+
+**理由**: 
+- 例外が発生しても必ずunlockされる
+- コードがシンプルで読みやすい
+- 最も軽量なRAIIラッパー
+
+#### 2. 複数mutexのロック: std::lock + adopt_lock (C++14推奨)
+
+```cpp
+// ✅ GOOD: C++14でのデッドロック安全な方法
+void transfer(BankAccount& from, BankAccount& to, double amount) {
+    // 1. std::lockでデッドロック回避
+    std::lock(from.mutex_, to.mutex_);
+    
+    // 2. adopt_lockでRAII管理に移行
+    std::lock_guard<std::mutex> lock1(from.mutex_, std::adopt_lock);
+    std::lock_guard<std::mutex> lock2(to.mutex_, std::adopt_lock);
+    
+    from.balance_ -= amount;
+    to.balance_ += amount;
+}
+```
+
+**理由**: 
+- C++14環境でもデッドロック回避可能
+- `std::lock`が複数mutexを安全に取得
+- RAIIで自動解放を保証
+
+#### 3. 条件変数との組み合わせ: std::unique_lock
+
+```cpp
+// ✅ GOOD: 条件変数には unique_lock を使用
+class ThreadSafeQueue {
+    std::mutex mutex_;
+    std::condition_variable cv_;
+    std::queue<int> queue_;
+
+public:
+    int pop() {
+        std::unique_lock<std::mutex> lock(mutex_);
+        cv_.wait(lock, [this] { return !queue_.empty(); });
+        
+        int value = queue_.front();
+        queue_.pop();
+        return value;
+    }
+};
+```
+
+#### 4. イベントドリブンでの安全なロック管理
+
+```cpp
+// ✅ GOOD: コールバック登録前にロックを解放
+class EventManager {
+    std::mutex mutex_;
+    std::map<std::string, std::function<void()>> handlers_;
+
+public:
+    void emit(const std::string& event) {
+        std::function<void()> handler;
+        {
+            // 1. ロック下でハンドラーをコピー
+            std::lock_guard<std::mutex> lock(mutex_);
+            auto it = handlers_.find(event);
+            if (it != handlers_.end()) {
+                handler = it->second;
+            }
+        }  // 2. ロックを解放
+        
+        // 3. ロック外でハンドラーを実行
+        if (handler) {
+            handler();  // デッドロック安全
+        }
+    }
+};
+```
+
+### ❌ DON'T: 避けるべきパターン
+
+#### 1. 手動 lock/unlock
+
+```cpp
+// ❌ BAD: 例外安全でない
+void deposit(double amount) {
+    mutex_.lock();
+    balance_ += amount;  // ここで例外が発生するとunlockされない！
+    mutex_.unlock();
+}
+```
+
+**問題点**: 
+- 例外発生時にmutexがロックされたまま
+- 早期returnでunlockを忘れる可能性
+
+#### 2. 逆順でのmutex取得
+
+```cpp
+// ❌ BAD: デッドロックの危険性
+void funcA() {
+    std::lock_guard<std::mutex> lock1(mutex1_);
+    std::lock_guard<std::mutex> lock2(mutex2_);
+}
+
+void funcB() {
+    std::lock_guard<std::mutex> lock2(mutex2_);  // 逆順！
+    std::lock_guard<std::mutex> lock1(mutex1_);
+}
+```
+
+**修正方法**: 
+```cpp
+// ✅ GOOD: std::lock で解決
+void funcA() {
+    std::lock(mutex1_, mutex2_);
+    std::lock_guard<std::mutex> lock1(mutex1_, std::adopt_lock);
+    std::lock_guard<std::mutex> lock2(mutex2_, std::adopt_lock);
+}
+```
+
+#### 3. ロック中の外部関数呼び出し
+
+```cpp
+// ❌ BAD: 未知の依存関係
+class DataProcessor {
+    std::mutex mutex_;
+    
+    void process(const std::function<void()>& callback) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        callback();  // callbackが何をするかわからない！
+    }
+};
+```
+
+**修正方法**: 
+```cpp
+// ✅ GOOD: ロックを解放してから外部関数を呼び出す
+void process(const std::function<void()>& callback) {
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        // クリティカルセクション
+    } // ここでロックが解放される
+    
+    callback();  // ロック外で呼び出し
+}
+```
+
+### 命名規則
+
+#### Mutex変数の命名
+
+```cpp
+// ✅ GOOD: 保護対象を明示
+class BankAccount {
+    double balance_;
+    mutable std::mutex balance_mutex_;  // balanceを保護
+};
+```
+
+**規則**: 
+- `保護対象_mutex_` または `保護対象_mtx_`
+- グローバルmutexは `g_XXX_mutex`
+
+### 一般的なパターン
+
+#### パターン 1: スレッドセーフシングルトン (C++11 Meyers' Singleton)
+
+```cpp
+// ✅ GOOD: スレッドセーフな初期化
+class Singleton {
+public:
+    static Singleton& getInstance() {
+        static Singleton instance;  // C++11以降はスレッドセーフ
+        return instance;
+    }
+    
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+private:
+    Singleton() = default;
+};
+```
+
+#### パターン 2: スレッドセーフキュー
+
+```cpp
+// ✅ GOOD: 生産者・消費者パターン
+template<typename T>
+class ThreadSafeQueue {
+    mutable std::mutex mutex_;
+    std::queue<T> queue_;
+    std::condition_variable cv_;
+
+public:
+    void push(T value) {
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            queue_.push(std::move(value));
+        }
+        cv_.notify_one();
+    }
+
+    T pop() {
+        std::unique_lock<std::mutex> lock(mutex_);
+        cv_.wait(lock, [this] { return !queue_.empty(); });
+        
+        T value = std::move(queue_.front());
+        queue_.pop();
+        return value;
+    }
+};
+```
+
+### デッドロック回避チェックリスト
+
+コードレビュー時に以下を確認:
+
+#### 基本チェック
+- [ ] すべてのmutexがRAIIで管理されている（lock_guard, unique_lock）
+- [ ] 手動の`lock()`/`unlock()`呼び出しが存在しない
+- [ ] 複数mutexの取得に`std::lock` + `adopt_lock`を使用
+- [ ] ロックの順序が一貫している
+
+#### 高度なチェック
+- [ ] ロック中に外部関数を呼び出していない
+- [ ] ロック中のI/O操作を最小化している
+- [ ] 条件変数には`unique_lock`を使用
+- [ ] `recursive_mutex`の使用が正当化されている
+
+#### パフォーマンスチェック
+- [ ] ロックの保持時間が最小化されている
+- [ ] mutex粒度が適切（細かすぎず、粗すぎず）
+
+### 検証とテスト
+
+#### ThreadSanitizer (TSan) の使用
+
+```bash
+# ✅ GOOD: コンパイル時にTSanを有効化
+g++ -fsanitize=thread -g -O1 main.cpp -o main
+./main
+```
+
+#### Helgrind (Valgrind) の使用
+
+```bash
+# ✅ GOOD: 実行時にデッドロック検出
+valgrind --tool=helgrind ./main
+```
+
+### 関連リソース
+
+- [C++ Core Guidelines: Concurrency](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-concurrency)
+- [C++ Reference: Thread support library](https://en.cppreference.com/w/cpp/thread)
+- [Anthony Williams: C++ Concurrency in Action](https://www.manning.com/books/c-plus-plus-concurrency-in-action-second-edition)
