@@ -21,7 +21,7 @@ description: '開発・運用手順書作成の専門家。新人にも分かり
 
 2. **ファイル命名規則の遵守**
    - 形式: `<動詞>-<対象>-<操作内容>.md`
-   - 例: `create-api-endpoint.md`, `deploy-kubernetes-app.md`
+   - 例: `generate-api-endpoint.md`, `deploy-kubernetes-app.md`
    - 小文字とハイフン区切りで統一
 
 3. **Mermaid図の活用**
@@ -240,22 +240,22 @@ sequenceDiagram
 
 私は以下のガイドラインに準拠して作業します:
 
-- [手順書作成標準](../instructions/create-procedure-document.instructions.md)
-- [手順書生成プロンプト](../prompts/create-procedure-document.prompt.md)
+- [手順書作成標準](../instructions/generate-procedure-document.instructions.md)
+- [手順書生成プロンプト](../prompts/generate-procedure-document.prompt.md)
 - [Markdown記法ガイド](../instructions/markdown.instructions.md)
 
 ## 🚀 使い方
 
 ### チャットで相談
 ```
-@create-procedure-document
+@generate-procedure-document
 「〇〇の手順書を作りたい」
 「この手順書をレビューしてください」
 ```
 
 ### プロンプトで一括生成
 ```
-#create-procedure-document
+#generate-procedure-document
 Document Type: development
 Target System: マイクロサービスAPI
 Procedure Goal: 新規エンドポイント追加

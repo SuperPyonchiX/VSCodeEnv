@@ -128,9 +128,9 @@ model: "[特定のモデルが必要な場合のみ]"
 
 生成されるプロンプトは、以下のような高品質プロンプトで観察されるパターンに従います：
 - **包括的な青写真** (architecture-blueprint-generator)
-- **構造化された仕様** (create-github-action-workflow-specification)  
+- **構造化された仕様** (generate-github-action-workflow-specification)  
 - **ベストプラクティスガイド** (dotnet-best-practices, csharp-xunit)
-- **実装計画** (create-implementation-plan)
+- **実装計画** (generate-implementation-plan)
 - **コード生成** (playwright-generate-test)
 
 各プロンプトは以下のために最適化されます：

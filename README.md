@@ -82,16 +82,16 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | [ai-prompt-engineering-safety-review.prompt.md](.github/prompts/ai-prompt-engineering-safety-review.prompt.md) | AIプロンプトのセキュリティとバイアス評価 | `#file:.github/prompts/ai-prompt-engineering-safety-review.prompt.md` |
 | [analyze-cpp-bugfix-impact.prompt.md](.github/prompts/analyze-cpp-bugfix-impact.prompt.md) | C++バグ修正の影響範囲を分析し、横にらみチェックを実施 | `#file:.github/prompts/analyze-cpp-bugfix-impact.prompt.md` |
 | [analyze-cpp-concurrency.prompt.md](.github/prompts/analyze-cpp-concurrency.prompt.md) | C++並行処理の排他制御を分析してデッドロックを検出 | `#file:.github/prompts/analyze-cpp-concurrency.prompt.md` |
-| [create-agentsmd.prompt.md](.github/prompts/create-agentsmd.prompt.md) | 高品質なエージェントファイルを作成 | `#file:.github/prompts/create-agentsmd.prompt.md` |
-| [create-customization-md.prompt.md](.github/prompts/create-customization-md.prompt.md) | プロンプト+エージェントのペアを統合的に生成 | `#file:.github/prompts/create-customization-md.prompt.md` |
-| [create-instructionsmd.prompt.md](.github/prompts/create-instructionsmd.prompt.md) | 高品質なインストラクションファイルを作成 | `#file:.github/prompts/create-instructionsmd.prompt.md` |
-| [create-procedure-document.prompt.md](.github/prompts/create-procedure-document.prompt.md) | Mermaid図付きの開発・運用手順書を生成 | `#file:.github/prompts/create-procedure-document.prompt.md` |
-| [create-promptsmd.prompt.md](.github/prompts/create-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成 | `#file:.github/prompts/create-promptsmd.prompt.md` |
-| [create-python-mcp-server.prompt.md](.github/prompts/create-python-mcp-server.prompt.md) | Python MCPサーバープロジェクトを作成 | `#file:.github/prompts/create-python-mcp-server.prompt.md` |
-| [create-readme.prompt.md](.github/prompts/create-readme.prompt.md) | 包括的なREADME.mdファイルを生成 | `#file:.github/prompts/create-readme.prompt.md` |
-| [create-typescript-mcp-server.prompt.md](.github/prompts/create-typescript-mcp-server.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/create-typescript-mcp-server.prompt.md` |
+| [generate-agentsmd.prompt.md](.github/prompts/generate-agentsmd.prompt.md) | 高品質なエージェントファイルを作成 | `#file:.github/prompts/generate-agentsmd.prompt.md` |
+| [generate-customization-md.prompt.md](.github/prompts/generate-customization-md.prompt.md) | プロンプト+エージェントのペアを統合的に生成 | `#file:.github/prompts/generate-customization-md.prompt.md` |
+| [generate-instructionsmd.prompt.md](.github/prompts/generate-instructionsmd.prompt.md) | 高品質なインストラクションファイルを作成 | `#file:.github/prompts/generate-instructionsmd.prompt.md` |
+| [generate-procedure-document.prompt.md](.github/prompts/generate-procedure-document.prompt.md) | Mermaid図付きの開発・運用手順書を生成 | `#file:.github/prompts/generate-procedure-document.prompt.md` |
+| [generate-promptsmd.prompt.md](.github/prompts/generate-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成 | `#file:.github/prompts/generate-promptsmd.prompt.md` |
+| [generate-python-mcp-server.prompt.md](.github/prompts/generate-python-mcp-server.prompt.md) | Python MCPサーバープロジェクトを作成 | `#file:.github/prompts/generate-python-mcp-server.prompt.md` |
+| [generate-readme.prompt.md](.github/prompts/generate-readme.prompt.md) | 包括的なREADME.mdファイルを生成 | `#file:.github/prompts/generate-readme.prompt.md` |
+| [generate-typescript-mcp-server.prompt.md](.github/prompts/generate-typescript-mcp-server.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/generate-typescript-mcp-server.prompt.md` |
 | [github-copilot-starter.prompt.md](.github/prompts/github-copilot-starter.prompt.md) | GitHub Copilotの使用を開始するためのガイド | `#file:.github/prompts/github-copilot-starter.prompt.md` |
-| [prompt-builder.prompt.md](.github/prompts/create-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成（レガシー） | `#file:.github/prompts/prompt-builder.prompt.md` || [review-cpp14-code.prompt.md](.github/prompts/review-cpp14-code.prompt.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー実行(Git差分対応) | `#file:.github/prompts/review-cpp14-code.prompt.md` |
+| [prompt-builder.prompt.md](.github/prompts/generate-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成（レガシー） | `#file:.github/prompts/prompt-builder.prompt.md` || [review-cpp14-code.prompt.md](.github/prompts/review-cpp14-code.prompt.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー実行(Git差分対応) | `#file:.github/prompts/review-cpp14-code.prompt.md` |
 ### 📋 インストラクションファイル
 
 インストラクションファイルは、特定のファイルタイプに自動的に適用されるルールを定義します。
@@ -117,10 +117,10 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 | [analyze-cpp-concurrency.agent.md](.github/agents/analyze-cpp-concurrency.agent.md) | C++並行処理のデッドロック分析と最適化(C++14標準内蔵) | `@analyze-cpp-concurrency` |
 | [beast-mode.agent.md](.github/agents/beast-mode.agent.md) | 深い思考プロセスと最大創造性を持つ高度なエージェント | `@beast-mode` |
 | [context7.agent.md](.github/agents/context7.agent.md) | コンテキスト認識型の高度なアシスタント | `@context7` |
-| [create-customization-md.agent.md](.github/agents/create-customization-md.agent.md) | タスク自動化ファイル(プロンプト+エージェント)のペア設計と生成 | `@create-customization-md` |
-| [create-procedure-document.agent.md](.github/agents/create-procedure-document.agent.md) | 開発・運用手順書作成の専門家(詳細ガイドライン内蔵) | `@create-procedure-document` |
-| [create-python-mcp-server.agent.md](.github/agents/create-python-mcp-server.agent.md) | Python MCPサーバー開発の専門家 | `@create-python-mcp-server` |
-| [create-typescript-mcp-server.agent.md](.github/agents/create-typescript-mcp-server.agent.md) | TypeScript MCPサーバー開発の専門家 | `@create-typescript-mcp-server` |
+| [generate-customization-md.agent.md](.github/agents/generate-customization-md.agent.md) | タスク自動化ファイル(プロンプト+エージェント)のペア設計と生成 | `@generate-customization-md` |
+| [generate-procedure-document.agent.md](.github/agents/generate-procedure-document.agent.md) | 開発・運用手順書作成の専門家(詳細ガイドライン内蔵) | `@generate-procedure-document` |
+| [generate-python-mcp-server.agent.md](.github/agents/generate-python-mcp-server.agent.md) | Python MCPサーバー開発の専門家 | `@generate-python-mcp-server` |
+| [generate-typescript-mcp-server.agent.md](.github/agents/generate-typescript-mcp-server.agent.md) | TypeScript MCPサーバー開発の専門家 | `@generate-typescript-mcp-server` |
 | [prompt-builder.agent.md](.github/agents/prompt-builder.agent.md) | プロンプトエンジニアリングとプロンプト検証システム | `@prompt-builder` |
 | [review-cpp14-code.agent.md](.github/agents/review-cpp14-code.agent.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー専門家(Git差分対応) | `@review-cpp14-code` |
 | [software-engineer.agent.md](.github/agents/software-engineer.agent.md) | 包括的なソフトウェアエンジニアリング支援 | `@software-engineer` |
@@ -136,13 +136,13 @@ GitHub Copilotは強力なAIペアプログラマーですが、カスタマイ�
 プロンプトファイルを使用するには、GitHub Copilotチャットで以下のように参照します:
 
 ```
-@workspace Follow instructions in #file:.github/prompts/create-readme.prompt.md
+@workspace Follow instructions in #file:.github/prompts/generate-readme.prompt.md
 ```
 
 または、特定のコンテキストで:
 
 ```
-Create a new TypeScript MCP server following #file:.github/prompts/create-typescript-mcp-server.prompt.md
+Create a new TypeScript MCP server following #file:.github/prompts/generate-typescript-mcp-server.prompt.md
 ```
 
 ### エージェントの使用
@@ -150,7 +150,7 @@ Create a new TypeScript MCP server following #file:.github/prompts/create-typesc
 エージェントを呼び出すには、チャットで `@` に続けてエージェント名を入力します:
 
 ```
-@create-typescript-mcp-server Help me create a new MCP server with file system tools
+@generate-typescript-mcp-server Help me create a new MCP server with file system tools
 ```
 
 ```
@@ -170,7 +170,7 @@ Create a new Python file following #file:.github/instructions/python.instruction
 新しいカスタマイゼーションファイルを作成するには:
 
 ```
-@workspace Follow instructions in #file:.github/prompts/create-customization-md.prompt.md
+@workspace Follow instructions in #file:.github/prompts/generate-customization-md.prompt.md
 Goal: Create customization files for REST API development
 ```
 
@@ -200,7 +200,7 @@ Goal: Create customization files for REST API development
 
 - **役割分担**: プロンプト(タスク実行)とエージェント(対話的支援)が相互補完
 - **一貫性**: 同じベース名を使用し、プロンプトの`mode`とエージェント名を一致
-- **ペア生成**: `@create-customization-md`で統一的に生成可能みを指定
+- **ペア生成**: `@generate-customization-md`で統一的に生成可能みを指定
 - **ペルソナ**: 明確な役割と専門知識を定義
 
 ## 参考資料

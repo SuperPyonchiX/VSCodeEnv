@@ -508,7 +508,7 @@ public:
 ## 🔗 参考資料
 
 ### 内部ドキュメント
-- [統合カスタマイゼーションガイドライン](../instructions/create-customization-md.instructions.md)
+- [統合カスタマイゼーションガイドライン](../instructions/generate-customization-md.instructions.md)
 - [Copilotインストラクション](../../copilot-instructions.md)
 
 ### 外部リソース

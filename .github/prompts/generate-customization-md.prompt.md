@@ -1,6 +1,6 @@
 ---
 description: 'ユーザー目的から2つのタスク自動化ファイル(プロンプト+エージェントのペア)を生成'
-agent: 'create-customization-md'
+agent: 'generate-customization-md'
 argument-hint: '実現したい目的を詳しく説明してください'
 tools: ['vscode', 'edit', 'read', 'search', 'web', 'todo']
 ---
@@ -63,7 +63,7 @@ tools: ['vscode', 'edit', 'read']  # 最小権限の原則
 ---
 ```
 
-**命名規則**: `create-*`, `analyze-*`, `refactor-*`, `optimize-*`
+**命名規則**: `generate-*`, `analyze-*`, `refactor-*`, `optimize-*`
 
 **ツール優先順位** (重要):
 1. **プロンプトの`tools`**: タスク実行時に使用
@@ -187,15 +187,15 @@ tools: ['read', 'search', 'execute', 'agents']
 **入力**: "REST APIの開発を効率化したい"
 
 **生成ファイル**:
-1. `create-api-endpoints.prompt.md` - APIエンドポイント生成タスク
-2. `create-api-endpoints.agent.md` - API設計の専門家
+1. `generate-api-endpoints.prompt.md` - APIエンドポイント生成タスク
+2. `generate-api-endpoints.agent.md` - API設計の専門家
 
 **フロントマター例**:
 ```yaml
 # プロンプトファイル
 ---
 description: 'RESTful APIエンドポイントを自動生成'
-agent: 'create-api-endpoints'
+agent: 'generate-api-endpoints'
 model: 'claude-sonnet-4.5'
 tools: ['vscode', 'edit', 'read', 'search']
 ---
@@ -207,19 +207,19 @@ tools: ['vscode', 'edit', 'read', 'search', 'web']
 model: 'claude-sonnet-4.5'
 handoffs:
   - label: 'APIテストを生成'
-    agent: 'create-api-tests'
+    agent: 'generate-api-tests'
     prompt: '上記のAPIエンドポイントのテストを生成してください'
     send: false
   - label: 'API仕様書を作成'
-    agent: 'create-api-docs'
+    agent: 'generate-api-docs'
     prompt: 'OpenAPI仕様書を生成してください'
     send: false
 ---
 ```
 
 **使い方**:
-- タスク実行: `#create-api-endpoints`
-- 相談: `@create-api-endpoints`
+- タスク実行: `#generate-api-endpoints`
+- 相談: `@generate-api-endpoints`
 - 次のステップ: handoffsボタンで自動遷移
 
 ### 例2: サブエージェント活用パターン

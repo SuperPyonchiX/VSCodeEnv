@@ -50,7 +50,7 @@ mode: 'ask' # または 'edit' または 'agent'
 - `.prompt.md` 拡張子を使用
 - ケバブケース（ハイフン区切りの小文字）を使用
 - アクションを伝える説明的な名前
-- 例: `generate-readme.prompt.md`, `create-test-suite.prompt.md`, `analyze-performance.prompt.md`
+- 例: `generate-readme.prompt.md`, `generate-test-suite.prompt.md`, `analyze-performance.prompt.md`
 - 避ける: `prompt1.prompt.md`, `myPrompt.prompt.md`
 
 ## ファイル構造

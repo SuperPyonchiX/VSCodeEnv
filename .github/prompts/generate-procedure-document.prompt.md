@@ -1,6 +1,6 @@
 ---
 description: '開発・運用手順書をMermaid図付きで生成するプロンプト'
-mode: 'create-procedure-document'
+mode: 'generate-procedure-document'
 ---
 
 # 手順書生成プロンプト
@@ -99,13 +99,13 @@ stateDiagram-v2
 
 ## 🔗 関連リソース
 
-- [手順書作成ガイドライン](../instructions/create-procedure-document.instructions.md)
-- [テクニカルライターアシスタント](../agents/create-procedure-document.agent.md)
+- [手順書作成ガイドライン](../instructions/generate-procedure-document.instructions.md)
+- [テクニカルライターアシスタント](../agents/generate-procedure-document.agent.md)
 
 ## 💡 使用例
 
 ```
-#create-procedure-document
+#generate-procedure-document
 
 Document Type: development
 Target System: マイクロサービスAPI
@@ -115,4 +115,4 @@ Target Audience: 入社1年目の開発者
 
 ## 📚 参考
 
-自動適用されるルールについては [create-procedure-document.instructions.md](../instructions/create-procedure-document.instructions.md) を参照してください。
+自動適用されるルールについては [generate-procedure-document.instructions.md](../instructions/generate-procedure-document.instructions.md) を参照してください。

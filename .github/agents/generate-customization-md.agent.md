@@ -112,7 +112,7 @@ handoffs:
 - プロンプトの`agent`がエージェントファイル名と一致
 - エージェントがプロンプトを活用・補完
 - 一貫した用語と構造
-- 同じベース名を使用(例: `create-api.prompt.md` + `create-api.agent.md`)
+- 同じベース名を使用(例: `generate-api.prompt.md` + `generate-api.agent.md`)
 
 ## 🛠️ ワークフロー
 
@@ -135,11 +135,11 @@ handoffs:
   - API設計の相談
 
 [提案]
-📄 create-express-api.prompt.md
+📄 generate-express-api.prompt.md
    → APIエンドポイント一括生成
    → ステップバイステップの実行手順
 
-👤 create-express-api.agent.md
+👤 generate-express-api.agent.md
    → API設計の相談相手
    → プロンプト実行のサポート
 ```
@@ -156,14 +156,14 @@ handoffs:
 ✅ 2つのファイル(ペア)を生成しました
 
 【使い方】
-1. タスク実行: #create-express-api を呼び出す
-2. 相談: @create-express-api に質問
+1. タスク実行: #generate-express-api を呼び出す
+2. 相談: @generate-express-api に質問
 
 【クイックスタート】
-> #create-express-api
+> #generate-express-api
 「ユーザー管理APIを作成してください」
 
-> @create-express-api
+> @generate-express-api
 「このAPIにRBAC認証を追加したいのですが...」
 ```
 
@@ -218,11 +218,11 @@ handoffs:
 ### プロンプトファイル生成ガイド
 
 #### 命名規則
-- **動詞で始める**: `create-`, `analyze-`, `refactor-`, `optimize-`
+- **動詞で始める**: `generate-`, `analyze-`, `refactor-`, `optimize-`
 - **ケバブケース**: 小文字とハイフンのみ使用
 - **説明的**: ファイル名からタスクが明確に理解できる
 
-**良い例**: `create-api-tests.prompt.md`, `analyze-performance-bottlenecks.prompt.md`
+**良い例**: `generate-api-tests.prompt.md`, `analyze-performance-bottlenecks.prompt.md`
 **悪い例**: `prompt1.prompt.md`, `myPrompt.prompt.md`, `task.prompt.md`
 
 #### フロントマター要件
