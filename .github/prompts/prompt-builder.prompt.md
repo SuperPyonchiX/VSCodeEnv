@@ -1,5 +1,5 @@
 ---
-mode: 'prompt-builder'
+agent: 'prompt-builder'
 tools: ['search/codebase', 'edit/editFiles', 'search']
 description: '適切な構造、ツール、ベストプラクティスを持つ高品質なGitHub Copilotプロンプトの作成をユーザーに案内。'
 ---

@@ -1,5 +1,5 @@
 ---
-mode: 'generate-python-mcp-server'
+agent: 'generate-python-mcp-server'
 description: 'ツール、リソース、適切な設定を持つ完全なPythonのMCPサーバープロジェクトを生成'
 ---
 

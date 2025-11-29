@@ -1,6 +1,6 @@
 ---
 description: 'AUTOSAR C++14およびCERT C++準拠のコードレビューを実行'
-mode: 'review-cpp14-code'
+agent: 'review-cpp14-code'
 tools: ['vscode', 'read', 'edit', 'search']
 ---
 

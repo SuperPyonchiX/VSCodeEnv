@@ -1,6 +1,6 @@
 ---
-mode: 'agent'
-tools: ['edit', 'githubRepo', 'changes', 'problems', 'search', 'runCommands', 'fetch']
+agent: 'agent'
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/readFile', 'edit', 'search', 'web', 'fetch/*']
 description: '技術スタックに基づいて新しいプロジェクトの完全なGitHub Copilot設定をセットアップ'
 ---
 
