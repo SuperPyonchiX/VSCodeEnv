@@ -1,8 +1,6 @@
 ---
 description: 'C++14バグ修正の影響範囲を分析し、同様のパターンが存在する箇所を横にらみチェック'
 mode: 'analyze-cpp-bugfix-impact'
-tools: ['semantic_search', 'grep_search', 'read_file', 'list_code_usages']
-model: 'claude-sonnet-4.5'
 ---
 
 # C++バグ修正横にらみ分析

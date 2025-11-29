@@ -1,6 +1,6 @@
 ---
 description: 'C++14コードの排他制御を分析してデッドロックシナリオを検出し、修正案を提示'
-mode: 'analyze-cpp-concurrency'
+agent: 'analyze-cpp-concurrency'
 ---
 
 # C++ デッドロック静的解析

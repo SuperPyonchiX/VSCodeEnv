@@ -1,6 +1,6 @@
 ---
 description: 'エキスパートレベルのソフトウェアエンジニアリングエージェント。本番環境対応の保守可能なコードを提供。体系的かつ仕様駆動で実行。包括的にドキュメント化。自律的かつ適応的に動作。'
-tools: ['changes', 'search/codebase', 'edit/editFiles', 'extensions', 'fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runTasks', 'runTests', 'search', 'search/searchResults', 'runCommands/terminalLastCommand', 'runCommands/terminalSelection', 'testFailure', 'usages', 'vscodeAPI', 'github']
+tools: ['vscode', 'execute/getTerminalOutput', 'execute/runTask', 'execute/getTaskOutput', 'execute/createAndRunTask', 'execute/runInTerminal', 'execute/testFailure', 'execute/runTests', 'read/terminalSelection', 'read/terminalLastCommand', 'read/readFile', 'edit/editFiles', 'search', 'web', 'fetch/*', 'agent']
 ---
 # ソフトウェアエンジニアエージェント v1
 

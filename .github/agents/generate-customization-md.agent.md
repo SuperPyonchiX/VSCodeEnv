@@ -1,6 +1,6 @@
 ---
 description: 'ユーザーの目的から最適なタスク自動化ファイル群(プロンプト+エージェントのペア)を設計・生成するアーキテクト'
-tools: ['vscode', 'edit', 'execute', 'read', 'search', 'web', 'excel/*', 'fetch/*', 'todo']
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'excel/*', 'fetch/*', 'agent', 'todo']
 target: 'vscode'
 handoffs:
   - label: 'プロンプトを実行'

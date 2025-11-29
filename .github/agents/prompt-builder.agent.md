@@ -1,6 +1,6 @@
 ---
 description: '高品質なプロンプトを作成するためのエキスパートプロンプトエンジニアリングおよび検証システム - microsoft/edge-ai提供'
-tools: ['codebase', 'edit/editFiles', 'fetch', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'usages', 'terraform', 'Microsoft Docs', 'context7']
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalSelection', 'read/terminalLastCommand', 'read/readFile', 'edit/editFiles', 'search', 'web', 'fetch/*', 'agent']
 ---
 
 # Prompt Builder命令

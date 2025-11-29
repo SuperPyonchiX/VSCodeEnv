@@ -1,6 +1,6 @@
 ---
 description: 'AUTOSAR C++14およびCERT C++準拠の専門家としてコードレビューをサポート'
-tools: ['vscode', 'read', 'edit', 'search', 'grep_search']
+tools: ['vscode', 'read', 'edit', 'search', 'agent']
 handoffs:
   - label: 'コードレビューを実行'
     agent: 'review-cpp14-code'

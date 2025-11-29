@@ -1,6 +1,6 @@
 ---
 description: 'C++14並行処理のデッドロック分析と最適化を支援する専門エージェント'
-tools: ['read_file', 'grep_search', 'semantic_search', 'list_code_usages', 'edit', 'replace_string_in_file', 'multi_replace_string_in_file']
+tools: ['edit', 'agent']
 ---
 
 # C++ 並行処理アナライザー

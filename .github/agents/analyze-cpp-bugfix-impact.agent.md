@@ -1,7 +1,6 @@
 ---
 description: 'C++バグ修正の横にらみ分析を支援する専門エージェント'
-tools: ['semantic_search', 'grep_search', 'read_file', 'list_code_usages', 'get_errors']
-model: 'claude-sonnet-4.5'
+tools: ['edit', 'agent']
 ---
 
 # C++バグ分析エキスパート 🔍
