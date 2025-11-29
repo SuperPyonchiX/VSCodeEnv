@@ -5,7 +5,14 @@ description: 'ツール、リソース、適切な設定を持つ完全なTypeSc
 
 # TypeScript MCPサーバーの生成
 
-<!-- 注意: modeは'agent'に設定されています。これはCopilotがエージェントとして動作し、ファイルの作成・編集を行うことを意味します。 -->
+<!-- 
+注意: modeは'agent'に設定されています。
+- Copilotがエージェントモードで動作し、プロジェクトファイルの作成・編集を自動的に行います
+- 新規ファイル作成: package.json, tsconfig.json, server.ts, .env.example など
+- ディレクトリ構造の設定とプロジェクトの初期化
+- ターミナルコマンドの実行（npm init, npm install など）
+- 使用前にプロジェクトディレクトリへの書き込み権限が必要です
+-->
 
 以下の仕様で完全なModel Context Protocol (MCP)サーバーをTypeScriptで作成します：
 

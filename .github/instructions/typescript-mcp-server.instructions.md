@@ -354,9 +354,15 @@ server.registerTool(
             //     return await externalApi.process(input);
             // }
             
+            // 実装例: 外部サービスへのAPI呼び出し
+            async function performRiskyOperation(data: string): Promise<string> {
+                // 実際の実装では、ここに外部APIやデータベースへの呼び出しを記述
+                // 例: return await fetch('https://api.example.com/process', { method: 'POST', body: data });
+                return `処理完了: ${data}`;
+            }
+            
             const result = await Promise.race([
-                // ここを実際の非同期操作に置き換え
-                Promise.reject(new Error('performRiskyOperationの実装が必要です - このエラーは実装後に削除されます')),
+                performRiskyOperation(input),
                 new Promise<never>((_, reject) => 
                     setTimeout(() => reject(new Error('操作がタイムアウトしました')), timeout * 1000)
                 )
@@ -436,12 +442,11 @@ server.registerTool(
             }
         }
         
-        // 実際の削除処理
-        // TODO: 以下のコメントを解除して実際のデータベース削除ロジックを実装
+        // 実際の削除処理（実装例）
+        // 実際のプロジェクトでは、以下のようにデータベース操作を実装
         // await database.delete(id);
         
-        // 注意: 以下の行は実装が完了したら削除してください
-        console.error(`TODO: ID "${id}" の削除ロジックを実装してください`);
+        // この例では削除成功を想定
         
         // 監査ログ
         console.error('データ削除:', {
@@ -635,12 +640,12 @@ server.registerTool(
     },
     async ({ data }) => {
         try {
-            // 機密操作の実行
-            // TODO: 以下のコメントを解除して実際のビジネスロジックを実装
+            // 機密操作の実行（実装例）
+            // 実際のプロジェクトでは、以下のように外部サービスを呼び出し
             // const result = await externalService.process(data);
             
-            // 注意: 以下は実装が完了したら置き換えてください
-            const result = `処理完了: ${data.substring(0, 50)}...`;
+            // この例ではダミーレスポンスを返す
+            const result = `処理完了: ${data.substring(0, 50)}${data.length > 50 ? '...' : ''}`;
             
             logAudit({
                 timestamp: new Date().toISOString(),
@@ -698,9 +703,9 @@ export async function calculateTool(a: number, b: number, op: '+' | '-' | '*' | 
             return a * b;
         case '/':
             return a / b;
-        default:
-            throw new Error(`未対応の演算子: ${op}`);
     }
+    // 注意: TypeScriptのexhaustive checkにより、ここには到達しません
+    // 将来の演算子追加時に型エラーを検出するための安全策
 }
 
 describe('calculateTool', () => {
