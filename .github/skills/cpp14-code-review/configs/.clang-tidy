@@ -1,0 +1,46 @@
+---
+# Clang-Tidy設定ファイル
+# AUTOSAR C++14 & CERT C++ 準拠チェック
+
+Checks: >
+  autosar-*,
+  cert-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers
+
+WarningsAsErrors: ''
+
+CheckOptions:
+  # AUTOSAR ルール設定
+  - key: autosar-A18-5-2.AllowNew
+    value: 'false'
+  
+  # 命名規約
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+  - key: readability-identifier-naming.MemberSuffix
+    value: '_'
+  
+  # パフォーマンス
+  - key: performance-unnecessary-copy-initialization.AllowedTypes
+    value: ''
+  
+  # 複雑度
+  - key: readability-function-cognitive-complexity.Threshold
+    value: '15'
+
+HeaderFilterRegex: '.*'
+AnalyzeTemporaryDtors: true
+FormatStyle: file

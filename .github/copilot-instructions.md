@@ -44,5 +44,6 @@
 - [VS Code プロンプトファイル](https://code.visualstudio.com/docs/copilot/customization/prompt-files)
 - [VS Code インストラクションファイル](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)
 - [VS Code カスタムエージェントファイル](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
+- [VS Code Agent Skills ドキュメント](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
 - [Awesome Copilot リポジトリ](https://github.com/github/awesome-copilot) (コミュニティ貢献の例)
 - [AGENTS.md 公式サイト](https://agents.md/)
