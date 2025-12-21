@@ -1,6 +1,6 @@
 ---
 name: python-mcp-development
-description: Guide for building Model Context Protocol (MCP) servers using Python SDK and FastMCP framework. Use this when creating, debugging, or optimizing Python-based MCP servers with tools, resources, and prompts.
+description: 'Python SDKとFastMCPフレームワークを使用したModel Context Protocol (MCP) サーバー構築のガイド。PythonベースのMCPサーバーの作成、デバッグ、最適化を行う際に使用してください。'
 ---
 
 # Python MCP Server Development

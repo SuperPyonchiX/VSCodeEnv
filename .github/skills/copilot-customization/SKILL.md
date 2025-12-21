@@ -1,6 +1,6 @@
 ---
 name: copilot-customization
-description: Guide for creating GitHub Copilot customization files including prompt files, custom agents, custom instructions, and agent skills. Use this when you need to create .prompt.md, .agent.md, .instructions.md, or SKILL.md files following VS Code best practices.
+description: 'GitHub Copilotカスタマイゼーションファイル（プロンプト、エージェント、インストラクション、スキル）の作成ガイド。.prompt.md、.agent.md、.instructions.md、SKILL.mdファイルをVS Codeのベストプラクティスに従って作成する際に使用してください。'
 ---
 
 # GitHub Copilot Customization Files

@@ -1,6 +1,6 @@
 ---
 name: typescript-mcp-development
-description: Guide for building Model Context Protocol (MCP) servers using TypeScript SDK with zod validation and Express integration. Use this when creating, debugging, or optimizing TypeScript-based MCP servers with tools, resources, and prompts.
+description: 'TypeScript SDKとzodバリデーション、Express統合を使用したModel Context Protocol (MCP) サーバー構築のガイド。TypeScriptベースのMCPサーバーの作成、デバッグ、最適化を行う際に使用してください。'
 ---
 
 # TypeScript MCP Server Development

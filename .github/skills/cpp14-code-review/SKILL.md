@@ -1,6 +1,6 @@
 ---
 name: cpp14-code-review
-description: Guide for reviewing C++14 code against AUTOSAR C++14 and CERT C++ coding standards. Use this when performing code reviews, security audits, or quality assessments for safety-critical C++ systems.
+description: 'AUTOSAR C++14およびCERT C++コーディング規約に準拠したC++14コードレビューのガイド。安全性重視のC++システムのコードレビュー、セキュリティ監査、品質評価を行う際に使用してください。'
 ---
 
 # C++14 Code Review with AUTOSAR and CERT Standards
