@@ -1,6 +1,6 @@
 ---
 description: 'エージェントの説明（シングルクォート）'
-tools: ['vscode', 'read', 'edit', 'create', 'search', 'web-search']  # オプション
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']  # オプション
 model: 'claude-sonnet-4.5'  # 推奨
 handoffs:  # オプション
   - label: '関連プロンプトを実行'
