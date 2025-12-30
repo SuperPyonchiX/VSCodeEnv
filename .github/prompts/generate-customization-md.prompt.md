@@ -1,8 +1,8 @@
 ---
 description: 'VS Code Copilotカスタマイズファイル(Instructions/Prompts/Agents/Skills)を目的に応じて生成'
 agent: 'generate-customization-md'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 argument-hint: '実現したい目的と生成したいファイルタイプを説明してください'
-tools: ['vscode', 'edit', 'read', 'search', 'web', 'fetch/*', 'todo']
 ---
 
 # VS Code Copilot カスタマイズファイル生成

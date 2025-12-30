@@ -1,6 +1,6 @@
 ---
 description: 'VS Code Copilotカスタマイズファイル(Instructions/Prompts/Agents/Skills)の設計・生成を支援するアーキテクト'
-tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'fetch/*', 'todo']
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 target: 'vscode'
 handoffs:
   - label: 'プロンプトを実行'

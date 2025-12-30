@@ -1,5 +1,11 @@
 ---
 description: 'PythonによるModel Context Protocol (MCP) サーバー開発の専門アシスタント'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
+handoffs:
+  - label: 'TypeScript版で実装'
+    agent: 'generate-typescript-mcp-server'
+    prompt: 'TypeScript SDKを使用してMCPサーバーを実装してください'
+    send: false
 ---
 
 # Python MCP サーバーエキスパート

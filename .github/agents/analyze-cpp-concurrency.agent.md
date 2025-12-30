@@ -1,6 +1,6 @@
 ---
 description: 'C++14並行処理のデッドロック分析と最適化を支援する専門エージェント'
-tools: ['edit', 'agent']
+tools: ['vscode', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 ---
 
 # C++ 並行処理アナライザー

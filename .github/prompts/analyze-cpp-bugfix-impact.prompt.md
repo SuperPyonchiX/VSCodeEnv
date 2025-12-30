@@ -1,6 +1,8 @@
 ---
 description: 'C++14バグ修正の影響範囲を分析し、同様のパターンが存在する箇所を横にらみチェック'
-mode: 'analyze-cpp-bugfix-impact'
+agent: 'analyze-cpp-bugfix-impact'
+tools: ['vscode', 'read', 'search', 'web', 'agent', 'todo']
+argument-hint: '修正したバグの説明、修正ファイルパス、修正後のコードを入力'
 ---
 
 # C++バグ修正横にらみ分析

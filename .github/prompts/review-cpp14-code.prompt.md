@@ -1,7 +1,8 @@
 ---
 description: 'AUTOSAR C++14およびCERT C++準拠のコードレビューを実行'
 agent: 'review-cpp14-code'
-tools: ['vscode', 'read', 'edit', 'search']
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'agent', 'todo']
+argument-hint: 'レビュー対象のファイルパスとフォーカス領域を指定'
 ---
 
 # C++14コードレビュー実行

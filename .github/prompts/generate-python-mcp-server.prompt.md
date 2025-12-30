@@ -1,6 +1,8 @@
 ---
-agent: 'generate-python-mcp-server'
 description: 'ツール、リソース、適切な設定を持つ完全なPythonのMCPサーバープロジェクトを生成'
+agent: 'generate-python-mcp-server'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
+argument-hint: 'MCPサーバーの目的と必要なツール・リソースを説明してください'
 ---
 
 # Python MCPサーバーの生成

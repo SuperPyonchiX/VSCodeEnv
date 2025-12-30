@@ -1,8 +1,8 @@
 ---
 description: '開発・運用手順書をMermaid図付きで生成するプロンプト'
 agent: 'generate-procedure-document'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 argument-hint: '手順書のタイプ、対象システム、目的を説明してください'
-tools: ['vscode', 'read', 'edit', 'search', 'web', 'agent']
 ---
 
 # 手順書生成プロンプト

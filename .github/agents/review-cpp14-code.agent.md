@@ -1,10 +1,18 @@
 ---
 description: 'AUTOSAR C++14およびCERT C++準拠の専門家としてコードレビューをサポート'
-tools: ['vscode', 'read', 'edit', 'search', 'agent']
+tools: ['vscode', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 handoffs:
   - label: 'コードレビューを実行'
     agent: 'review-cpp14-code'
     prompt: '指定されたファイルの包括的なコードレビューを実行してください。'
+    send: false
+  - label: 'バグ修正影響分析'
+    agent: 'analyze-cpp-bugfix-impact'
+    prompt: 'このコードレビューで発見された問題の影響範囲を分析してください。'
+    send: false
+  - label: '並行処理分析'
+    agent: 'analyze-cpp-concurrency'
+    prompt: 'このコードの並行処理パターンを分析してデッドロックの可能性を検出してください。'
     send: false
 ---
 

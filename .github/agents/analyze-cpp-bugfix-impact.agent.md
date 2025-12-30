@@ -1,6 +1,6 @@
 ---
 description: 'C++バグ修正の横にらみ分析を支援する専門エージェント'
-tools: ['edit', 'agent']
+tools: ['vscode', 'read', 'edit', 'search', 'web', 'agent', 'todo']
 ---
 
 # C++バグ分析エキスパート 🔍

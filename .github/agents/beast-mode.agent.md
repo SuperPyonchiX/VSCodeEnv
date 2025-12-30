@@ -1,5 +1,4 @@
 ---
-title: 'Ultimate Transparent Thinking Beast Mode - 究極の透明思考ビーストモード'
 description: '究極の透明思考ビーストモード - 最大限の創造性と認知オーバークロッキングによる超越的エージェント'
 ---
 

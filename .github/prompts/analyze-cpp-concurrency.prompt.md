@@ -1,6 +1,8 @@
 ---
 description: 'C++14コードの排他制御を分析してデッドロックシナリオを検出し、修正案を提示'
 agent: 'analyze-cpp-concurrency'
+tools: ['vscode', 'read', 'edit', 'search', 'web', 'agent', 'todo']
+argument-hint: '分析対象のC++ファイルまたはディレクトリを指定'
 ---
 
 # C++ デッドロック静的解析

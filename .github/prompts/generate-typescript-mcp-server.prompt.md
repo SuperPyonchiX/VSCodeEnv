@@ -1,6 +1,8 @@
 ---
-agent: 'generate-typescript-mcp-server'
 description: 'ツール、リソース、適切な設定を持つ完全なTypeScriptのMCPサーバープロジェクトを生成'
+agent: 'generate-typescript-mcp-server'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']
+argument-hint: 'MCPサーバーの目的と必要なツール・リソースを説明してください'
 ---
 
 # TypeScript MCPサーバーの生成
