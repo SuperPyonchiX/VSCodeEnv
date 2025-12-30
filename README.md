@@ -28,33 +28,29 @@
 ## 概要
 
 GitHub Copilotは強力なAIペアプログラマーですが、カスタマイゼーションによってさらに効果的になります。このコレクションは、プロジェクト固有のニーズに合わせてCopilotの動作を調整し、コーディング標準、ベストプラクティス、開発ワークフローを自動化するためのファイルを提供します。
-C++14コードレビュー（Git差分対応）
+
+**プロンプトファイル (`.prompt.md`)** - タスク実行レシピ
+- MCPサーバー生成（Python/TypeScript）
+- C++14コードレビュー（Git差分対応）
+- 並行処理分析とデッドロック検出
 - ドキュメント作成とバグ修正分析
 
 **インストラクションファイル (`.instructions.md`)** - 自動適用されるルール
-- Python、TypeScript開発標準
-- MCPサーバー開発ガイドライン
+- Python、TypeScript/JavaScript、C/C++開発標準
 - Markdown記述規約
-- プロンプト/インストラクション作成ガイド
+- プロンプト/エージェント/スキル作成ガイド
 
 **エージェントファイル (`.agent.md`)** - 対話型の専門家
 - TypeScript/Python MCPエキスパート
 - C++14コードレビュー専門家
 - 手順書作成専門家
-- プロンプトビルダー
+- カスタマイゼーションアーキテクト
 - 高度な思考モード
 
 **Agent Skills (`SKILL.md`)** - リソースを含むワークフロー
 - Python/TypeScript MCP開発（テンプレート、サンプル付き）
 - C++14コードレビュー（静的解析設定、チェックリスト付き）
-- Copilotカスタマイゼーション（全種類のテンプレート付き）記述規約
-- プロンプト/インストラクション作成ガイド
-
-**エージェントファイル (`.agent.md`)** - 対話型の専門家
-- TypeScript/Python MCPエキスパート
-- プロンプトビルダー
-- ソフトウェアエンジニアリングエージェント
-- 高度な思考モード
+- Copilotカスタマイゼーション（全種類のテンプレート付き）
 
 ## 使い始める
 
@@ -93,19 +89,13 @@ C++14コードレビュー（Git差分対応）
 
 | プロンプト | 説明 | 使用方法 |
 |--------|------|--------|
-| [ai-prompt-engineering-safety-review.prompt.md](.github/prompts/ai-prompt-engineering-safety-review.prompt.md) | AIプロンプトのセキュリティとバイアス評価 | `#file:.github/prompts/ai-prompt-engineering-safety-review.prompt.md` |
 | [analyze-cpp-bugfix-impact.prompt.md](.github/prompts/analyze-cpp-bugfix-impact.prompt.md) | C++バグ修正の影響範囲を分析し、横にらみチェックを実施 | `#file:.github/prompts/analyze-cpp-bugfix-impact.prompt.md` |
 | [analyze-cpp-concurrency.prompt.md](.github/prompts/analyze-cpp-concurrency.prompt.md) | C++並行処理の排他制御を分析してデッドロックを検出 | `#file:.github/prompts/analyze-cpp-concurrency.prompt.md` |
-| [generate-agentsmd.prompt.md](.github/prompts/generate-agentsmd.prompt.md) | 高品質なエージェントファイルを作成 | `#file:.github/prompts/generate-agentsmd.prompt.md` |
 | [generate-customization-md.prompt.md](.github/prompts/generate-customization-md.prompt.md) | プロンプト+エージェントのペアを統合的に生成 | `#file:.github/prompts/generate-customization-md.prompt.md` |
-| [generate-instructionsmd.prompt.md](.github/prompts/generate-instructionsmd.prompt.md) | 高品質なインストラクションファイルを作成 | `#file:.github/prompts/generate-instructionsmd.prompt.md` |
 | [generate-procedure-document.prompt.md](.github/prompts/generate-procedure-document.prompt.md) | Mermaid図付きの開発・運用手順書を生成 | `#file:.github/prompts/generate-procedure-document.prompt.md` |
-| [generate-promptsmd.prompt.md](.github/prompts/generate-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成 | `#file:.github/prompts/generate-promptsmd.prompt.md` |
 | [generate-python-mcp-server.prompt.md](.github/prompts/generate-python-mcp-server.prompt.md) | Python MCPサーバープロジェクトを作成 | `#file:.github/prompts/generate-python-mcp-server.prompt.md` |
-| [generate-readme.prompt.md](.github/prompts/generate-readme.prompt.md) | 包括的なREADME.mdファイルを生成 | `#file:.github/prompts/generate-readme.prompt.md` |
 | [generate-typescript-mcp-server.prompt.md](.github/prompts/generate-typescript-mcp-server.prompt.md) | TypeScript MCPサーバープロジェクトを作成 | `#file:.github/prompts/generate-typescript-mcp-server.prompt.md` |
-| [github-copilot-starter.prompt.md](.github/prompts/github-copilot-starter.prompt.md) | GitHub Copilotの使用を開始するためのガイド | `#file:.github/prompts/github-copilot-starter.prompt.md` |
-| [prompt-builder.prompt.md](.github/prompts/generate-promptsmd.prompt.md) | 高品質なプロンプトファイルを作成（レガシー） | `#file:.github/prompts/prompt-builder.prompt.md` || [review-cpp14-code.prompt.md](.github/prompts/review-cpp14-code.prompt.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー実行(Git差分対応) | `#file:.github/prompts/review-cpp14-code.prompt.md` |
+| [review-cpp14-code.prompt.md](.github/prompts/review-cpp14-code.prompt.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー実行(Git差分対応) | `#file:.github/prompts/review-cpp14-code.prompt.md` |
 ### 📋 インストラクションファイル
 
 インストラクションファイルは、特定のファイルタイプに自動的に適用されるルールを定義します。
@@ -113,13 +103,14 @@ C++14コードレビュー（Git差分対応）
 | インストラクション | 適用対象 | 説明 |
 |---------------|---------|------|
 | [python.instructions.md](.github/instructions/python.instructions.md) | `**/*.py` | Python開発のコーディング規約とベストプラクティス |
-| [typescript-mcp-server.instructions.md](.github/instructions/typescript-mcp-server.instructions.md) | `**/*.ts, **/*.js` | TypeScript MCPサーバー開発ガイドライン |
-| [python-mcp-server.instructions.md](.github/instructions/python-mcp-server.instructions.md) | `**/*.py` | Python MCPサーバー開発ガイドライン |
+| [typescript.instructions.md](.github/instructions/typescript.instructions.md) | `**/*.ts, **/*.tsx, **/*.js, **/*.jsx` | TypeScript/JavaScript開発規約 |
+| [cpp.instructions.md](.github/instructions/cpp.instructions.md) | `**/*.cpp, **/*.hpp, **/*.c, **/*.h` | C/C++ Modern C++ガイドライン |
 | [markdown.instructions.md](.github/instructions/markdown.instructions.md) | `**/*.md` | Markdown記述とドキュメント作成標準 |
-| [prompt.instructions.md](.github/instructions/prompt.instructions.md) | `**/*.prompt.md` | 高品質なプロンプトファイル作成ガイドライン |
-| [instructions.instructions.md](.github/instructions/instructions.instructions.md) | `**/*.instructions.md` | インストラクションファイル作成ガイドライン |
+| [prompt.instructions.md](.github/instructions/prompt.instructions.md) | `**/*.prompt.md` | プロンプトファイル作成ガイドライン |
+| [agent.instructions.md](.github/instructions/agent.instructions.md) | `**/*.agent.md` | エージェントファイル作成ガイドライン |
+| [skill.instructions.md](.github/instructions/skill.instructions.md) | `**/SKILL.md` | Agent Skillsファイル作成ガイドライン |
 
-**注**: C++分析や手順書作成の詳細ガイドラインは、対応するエージェントファイルに統合されています。
+**注**: C++14 AUTOSAR/CERT準拠の詳細なコードレビューガイドラインは、`cpp14-code-review`スキルに含まれています。
 
 ### 🤖 エージェントファイル
 
@@ -130,14 +121,11 @@ C++14コードレビュー（Git差分対応）
 | [analyze-cpp-bugfix-impact.agent.md](.github/agents/analyze-cpp-bugfix-impact.agent.md) | C++バグ修正の横にらみ分析と影響範囲評価(詳細チェックリスト内蔵) | `@analyze-cpp-bugfix-impact` |
 | [analyze-cpp-concurrency.agent.md](.github/agents/analyze-cpp-concurrency.agent.md) | C++並行処理のデッドロック分析と最適化(C++14標準内蔵) | `@analyze-cpp-concurrency` |
 | [beast-mode.agent.md](.github/agents/beast-mode.agent.md) | 深い思考プロセスと最大創造性を持つ高度なエージェント | `@beast-mode` |
-| [context7.agent.md](.github/agents/context7.agent.md) | コンテキスト認識型の高度なアシスタント | `@context7` |
 | [generate-customization-md.agent.md](.github/agents/generate-customization-md.agent.md) | タスク自動化ファイル(プロンプト+エージェント)のペア設計と生成 | `@generate-customization-md` |
 | [generate-procedure-document.agent.md](.github/agents/generate-procedure-document.agent.md) | 開発・運用手順書作成の専門家(詳細ガイドライン内蔵) | `@generate-procedure-document` |
 | [generate-python-mcp-server.agent.md](.github/agents/generate-python-mcp-server.agent.md) | Python MCPサーバー開発の専門家 | `@generate-python-mcp-server` |
 | [generate-typescript-mcp-server.agent.md](.github/agents/generate-typescript-mcp-server.agent.md) | TypeScript MCPサーバー開発の専門家 | `@generate-typescript-mcp-server` |
-| [prompt-builder.agent.md](.github/agents/prompt-builder.agent.md) | プロンプトエンジニアリングとプロンプト検証システム | `@prompt-builder` |
 | [review-cpp14-code.agent.md](.github/agents/review-cpp14-code.agent.md) | AUTOSAR C++14/CERT C++準拠のコードレビュー専門家(Git差分対応) | `@review-cpp14-code` |
-| [software-engineer.agent.md](.github/agents/software-engineer.agent.md) | 包括的なソフトウェアエンジニアリング支援 | `@software-engineer` |
 
 ### 🎯 Agent Skills
 
@@ -289,7 +277,28 @@ Goal: Create customization files for REST API development
 - [VS Code AI Toolkit](https://marketplace.visualstudio.com/items?itemName=ms-windows-ai-studio.windows-ai-studio)
 
 ## プロジェクト構造
-├── skills/              # Agent Skills（リソース付きワークフロー）
+
+```
+VSCodeEnv/
+├── .github/
+│   ├── agents/                    # カスタムエージェント定義
+│   │   ├── analyze-cpp-*.agent.md
+│   │   ├── generate-*.agent.md
+│   │   ├── review-cpp14-code.agent.md
+│   │   └── beast-mode.agent.md
+│   ├── instructions/              # ファイルタイプ別のルール
+│   │   ├── python.instructions.md
+│   │   ├── typescript.instructions.md
+│   │   ├── cpp.instructions.md
+│   │   ├── markdown.instructions.md
+│   │   ├── prompt.instructions.md
+│   │   ├── agent.instructions.md
+│   │   └── skill.instructions.md
+│   ├── prompts/                   # タスク実行レシピ
+│   │   ├── analyze-cpp-*.prompt.md
+│   │   ├── generate-*.prompt.md
+│   │   └── review-cpp14-code.prompt.md
+│   ├── skills/                    # Agent Skills（リソース付きワークフロー）
 │   │   ├── python-mcp-development/
 │   │   │   ├── SKILL.md
 │   │   │   ├── templates/
@@ -305,15 +314,8 @@ Goal: Create customization files for REST API development
 │   │   └── copilot-customization/
 │   │       ├── SKILL.md
 │   │       └── templates/
-│   
-```
-VSCodeEnv/
-├── .github/
-│   ├── agents/              # カスタムエージェント定義
-│   ├── instructions/        # ファイルタイプ別のルール
-│   ├── prompts/             # タスク実行レシピ
-│   └── copilot-instructions.md  # リポジトリ全体の指示
-└── README.md               # このファイル
+│   └── copilot-instructions.md    # リポジトリ全体の指示
+└── README.md                      # このファイル
 ```
 
 ## トラブルシューティング
