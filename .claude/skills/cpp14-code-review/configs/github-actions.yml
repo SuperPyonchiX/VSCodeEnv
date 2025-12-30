@@ -1,0 +1,53 @@
+name: C++ Code Review
+
+on:
+  pull_request:
+    paths:
+      - '**.cpp'
+      - '**.hpp'
+      - '**.h'
+
+jobs:
+  clang-tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Clang-Tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy
+
+      - name: Run Clang-Tidy
+        run: |
+          clang-tidy --config-file=.clang-tidy src/**/*.cpp
+
+  cppcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Cppcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck
+
+      - name: Run Cppcheck
+        run: |
+          cppcheck --enable=all --addon=cert --xml src/ 2> cppcheck-report.xml
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: cppcheck-report
+          path: cppcheck-report.xml
+
+  complexity-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Analyze Complexity
+        run: |
+          # 循環的複雑度チェック（例）
+          find src -name "*.cpp" -exec echo "Analyzing {}" \;
