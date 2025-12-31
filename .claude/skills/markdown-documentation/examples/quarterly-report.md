@@ -208,4 +208,4 @@ gantt
 
 ---
 
-*本報告に関するご質問は、開発部 山田（yamada@example.com）までお願いします。*
+*本報告に関する質問は、開発部 山田（yamada@example.com）まで。*
