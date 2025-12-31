@@ -4,8 +4,7 @@
       "Bash(tree:*)",
       "Bash(dir:*)",
       "WebSearch",
-      "WebFetch(domain:code.visualstudio.com)",
-      "Bash(ls -la \"D:\\\\Users\\\\ksk01\\\\Documents\\\\develop\\\\vscode_develop\\\\VSCodeEnv\\\\.github\\\\skills\\\\markdown-documentation\"\" 2>&1 || echo \"Path not found, trying alternative... \")"
+      "WebFetch(domain:code.visualstudio.com)"
     ]
   }
 }
