@@ -1,6 +1,7 @@
 ---
 description: 'インストラクションの説明（シングルクォート）'
-applyTo: '**/*.ext, **/specific-file.txt'  # globパターン（必須）
+name: 'instruction-name'  # オプション: UI表示名（未指定時はファイル名）
+applyTo: '**/*.ext, **/specific-file.txt'  # globパターン
 ---
 
 # インストラクションタイトル

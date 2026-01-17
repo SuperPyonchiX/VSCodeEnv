@@ -1,8 +1,11 @@
 ---
 description: 'エージェントの説明（シングルクォート）'
-tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'todo']  # オプション
+name: 'agent-name'  # オプション: UI表示名（未指定時はファイル名）
+tools: ['codebase', 'terminalCommand', 'editFiles', 'search']  # オプション
 model: 'claude-sonnet-4.5'  # 推奨
-handoffs:  # オプション
+infer: true  # オプション: サブエージェントとして使用（デフォルト: true）
+target: 'vscode'  # オプション: vscode または github-copilot
+handoffs:  # オプション: エージェント間の遷移定義
   - label: '関連プロンプトを実行'
     agent: 'agent-name'
     prompt: 'プロンプトの説明'

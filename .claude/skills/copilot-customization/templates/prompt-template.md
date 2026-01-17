@@ -1,7 +1,9 @@
 ---
-mode: 'ask'  # または 'agent'
 description: '簡潔で明確な説明をここに記述（シングルクォート使用）'
-tools: ['vscode', 'read', 'edit', 'search']  # オプション
+agent: 'ask'  # オプション: ask, edit, agent, またはカスタムエージェント名
+name: 'prompt-name'  # オプション: UI表示名（未指定時はファイル名）
+argument-hint: 'ユーザー入力のヒント'  # オプション: チャット入力欄に表示
+tools: ['codebase', 'terminalCommand', 'editFiles']  # オプション
 model: 'claude-sonnet-4.5'  # 推奨
 ---
 

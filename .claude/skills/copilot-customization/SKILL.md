@@ -27,17 +27,25 @@ description: 'GitHub Copilotカスタマイゼーションファイル（プロ�
 
 **必須要素**:
 - Markdown front matter（YAML）
-- `mode`: `ask`（質問）または`agent`（自律実行）
 - `description`: プロンプトの説明（シングルクォート）
+
+**オプション要素**:
+- `agent`: 実行エージェント（`ask`、`edit`、`agent`、またはカスタムエージェント名）
+- `name`: UI表示名（未指定時はファイル名）
+- `argument-hint`: チャット入力欄に表示するヒント
+- `tools`: 利用可能なツール一覧
+- `model`: 使用するAIモデル
 
 **テンプレート**: [prompt-template.md](./templates/prompt-template.md)
 
 **例**:
 ```markdown
 ---
-mode: 'ask'
 description: 'コードレビューを実行し、品質とセキュリティの問題を特定'
-tools: ['vscode', 'read', 'search']
+agent: 'ask'
+name: 'code-review'
+argument-hint: 'レビュー対象のファイルまたはコードを入力'
+tools: ['codebase', 'terminalCommand']
 model: 'claude-sonnet-4.5'
 ---
 
@@ -62,7 +70,15 @@ model: 'claude-sonnet-4.5'
 **必須要素**:
 - Markdown front matter（YAML）
 - `description`: エージェントの説明（シングルクォート）
-- オプション: `tools`、`model`、`handoffs`
+
+**オプション要素**:
+- `name`: UI表示名（未指定時はファイル名）
+- `tools`: 利用可能なツール一覧
+- `model`: 使用するAIモデル
+- `infer`: サブエージェントとして使用（デフォルト: true）
+- `target`: 対象環境（`vscode` または `github-copilot`）
+- `mcp-servers`: MCPサーバー設定（JSON形式）
+- `handoffs`: エージェント間の遷移定義
 
 **テンプレート**: [agent-template.md](./templates/agent-template.md)
 
@@ -70,8 +86,11 @@ model: 'claude-sonnet-4.5'
 ```markdown
 ---
 description: 'TypeScript MCPサーバー開発の専門アシスタント'
-tools: ['vscode', 'read', 'edit', 'create', 'web-search']
+name: 'typescript-mcp-expert'
+tools: ['codebase', 'terminalCommand', 'editFiles', 'search']
 model: 'claude-sonnet-4.5'
+infer: true
+target: 'vscode'
 handoffs:
   - label: 'プロンプトを実行'
     agent: 'generate-typescript-mcp-server'
@@ -99,7 +118,10 @@ handoffs:
 **必須要素**:
 - Markdown front matter（YAML）
 - `description`: インストラクションの説明（シングルクォート）
-- `applyTo`: 適用対象ファイルパターン（globパターン）
+
+**オプション要素**:
+- `name`: UI表示名（未指定時はファイル名）
+- `applyTo`: 適用対象ファイルパターン（globパターン）。未指定時は手動追加のみ
 
 **テンプレート**: [instructions-template.md](./templates/instructions-template.md)
 
@@ -107,6 +129,7 @@ handoffs:
 ```markdown
 ---
 description: 'Python MCPサーバー開発のコーディング規約'
+name: 'python-mcp-guidelines'
 applyTo: '**/*.py, **/pyproject.toml'
 ---
 
@@ -182,7 +205,13 @@ description: "Python MCP"  # ダブルクォート、詳細不足
 プロンプト・エージェントで使用するツールを明示:
 
 ```yaml
-tools: ['vscode', 'read', 'edit', 'search', 'web-search', 'agent']
+tools: ['codebase', 'terminalCommand', 'editFiles', 'search']
+```
+
+MCPサーバーのツールを含める場合は `<server name>/*` 形式を使用:
+
+```yaml
+tools: ['codebase', 'my-mcp-server/*']
 ```
 
 ### Model 指定（強く推奨）
