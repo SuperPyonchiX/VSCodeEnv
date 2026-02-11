@@ -16,7 +16,11 @@ project-root/
 ├── docs/             # ドキュメント
 ├── .github/          # GitHub設定
 │   ├── workflows/    # CI/CDワークフロー
-│   └── instructions/ # コーディング規約
+│   ├── agents/       # カスタムエージェント
+│   ├── instructions/ # コーディング規約
+│   ├── prompts/      # プロンプトファイル
+│   └── skills/       # Agent Skills
+├── AGENTS.md         # 常時オンのインストラクション（複数AIエージェント対応）
 └── config/           # 設定ファイル
 ```
 
@@ -135,4 +139,3 @@ ls -la dist/
 - [API ドキュメント](https://api-docs.example.com)
 - [デザインシステム](https://design.example.com)
 - [Slack チャンネル](https://your-team.slack.com/archives/C123456)
-

@@ -1,7 +1,7 @@
 ---
 description: 'インストラクションの説明（シングルクォート）'
 name: 'instruction-name'  # オプション: UI表示名（未指定時はファイル名）
-applyTo: '**/*.ext, **/specific-file.txt'  # globパターン
+applyTo: '**/*.ext, **/specific-file.txt'  # オプション: globパターン。未指定時はセマンティックマッチングまたは手動追加
 ---
 
 # インストラクションタイトル
@@ -17,9 +17,11 @@ applyTo: '**/*.ext, **/specific-file.txt'  # globパターン
 ## コーディング規約
 
 ### 規約1
+
 詳細な説明とサンプルコード
 
 ### 規約2
+
 詳細な説明とサンプルコード
 
 ## ベストプラクティス

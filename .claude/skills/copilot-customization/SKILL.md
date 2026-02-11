@@ -23,18 +23,33 @@ description: 'GitHub Copilotカスタマイゼーションファイル（プロ�
 
 **用途**: 再利用可能な質問・タスクのテンプレート
 
-**作成場所**: `.github/prompts/`
+**作成場所**: `.github/prompts/`（ユーザープロファイルの `prompts/` フォルダにも配置可能）
 
-**必須要素**:
-- Markdown front matter（YAML）
-- `description`: プロンプトの説明（シングルクォート）
+**Front matter フィールド**:
 
-**オプション要素**:
-- `agent`: 実行エージェント（`ask`、`edit`、`agent`、またはカスタムエージェント名）
-- `name`: UI表示名（未指定時はファイル名）
-- `argument-hint`: チャット入力欄に表示するヒント
-- `tools`: 利用可能なツール一覧
-- `model`: 使用するAIモデル
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `description` | いいえ | プロンプトの説明（シングルクォート） |
+| `name` | いいえ | UI表示名（未指定時はファイル名） |
+| `agent` | いいえ | 実行エージェント: `ask`, `edit`, `agent`, `plan`, またはカスタムエージェント名 |
+| `argument-hint` | いいえ | チャット入力欄に表示するヒント |
+| `tools` | いいえ | 利用可能なツール一覧 |
+| `model` | 推奨 | 使用するAIモデル（配列形式も可） |
+
+**変数構文**: プロンプト本文内で `${variableName}` 構文を使用可能
+
+| 変数 | 説明 |
+|------|------|
+| `${workspaceFolder}` | ワークスペースルート |
+| `${file}` | 現在のファイルパス |
+| `${fileBasename}` | ファイル名 |
+| `${selection}` / `${selectedText}` | 選択テキスト |
+| `${input:name}` | ユーザー入力を要求 |
+| `${input:name:placeholder}` | プレースホルダー付きユーザー入力 |
+
+**ツール参照**: 本文内で `#tool:<tool-name>` 構文でツールを参照可能
+
+**ファイル参照**: 相対パスで他ファイルを参照可能
 
 **テンプレート**: [prompt-template.md](./templates/prompt-template.md)
 
@@ -45,16 +60,16 @@ description: 'コードレビューを実行し、品質とセキュリティの
 agent: 'ask'
 name: 'code-review'
 argument-hint: 'レビュー対象のファイルまたはコードを入力'
-tools: ['codebase', 'terminalCommand']
+tools: ['codebase', 'problems']
 model: 'claude-sonnet-4.5'
 ---
 
 # コードレビュープロンプト
 
-指定されたファイルについて、以下の観点でレビューを実行してください:
+${file} について、以下の観点でレビューを実行してください:
 
 1. コード品質
-2. セキュリティ脆弱性
+2. セキュリティ脆弱性（#tool:codebase で関連コードを確認）
 3. パフォーマンス最適化の機会
 4. ベストプラクティス遵守
 
@@ -67,18 +82,23 @@ model: 'claude-sonnet-4.5'
 
 **作成場所**: `.github/agents/`
 
-**必須要素**:
-- Markdown front matter（YAML）
-- `description`: エージェントの説明（シングルクォート）
+**Front matter フィールド**:
 
-**オプション要素**:
-- `name`: UI表示名（未指定時はファイル名）
-- `tools`: 利用可能なツール一覧
-- `model`: 使用するAIモデル
-- `infer`: サブエージェントとして使用（デフォルト: true）
-- `target`: 対象環境（`vscode` または `github-copilot`）
-- `mcp-servers`: MCPサーバー設定（JSON形式）
-- `handoffs`: エージェント間の遷移定義
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `description` | いいえ | エージェントの説明（シングルクォート） |
+| `name` | いいえ | UI表示名（未指定時はファイル名） |
+| `argument-hint` | いいえ | チャット入力欄に表示するガイド |
+| `tools` | いいえ | 利用可能なツール一覧 |
+| `model` | 推奨 | 使用するAIモデル。配列で優先順位付きフォールバック指定も可能 |
+| `user-invokable` | いいえ | ドロップダウンに表示するか（デフォルト: `true`） |
+| `disable-model-invocation` | いいえ | サブエージェントとしての自動呼び出しを無効化（デフォルト: `false`） |
+| `agents` | いいえ | 利用可能なサブエージェント: `['*']`=全て, `[]`=なし, `['name']`=特定のみ |
+| `target` | いいえ | 対象環境: `vscode` または `github-copilot` |
+| `mcp-servers` | いいえ | MCPサーバー設定（JSON形式、GitHub Copilot向け） |
+| `handoffs` | いいえ | エージェント間の遷移定義 |
+
+> **非推奨**: `infer` フィールドは非推奨です。代わりに `user-invokable` と `disable-model-invocation` を使用してください。
 
 **テンプレート**: [agent-template.md](./templates/agent-template.md)
 
@@ -87,9 +107,11 @@ model: 'claude-sonnet-4.5'
 ---
 description: 'TypeScript MCPサーバー開発の専門アシスタント'
 name: 'typescript-mcp-expert'
+argument-hint: 'MCPサーバーに関する質問や要望を入力'
 tools: ['codebase', 'terminalCommand', 'editFiles', 'search']
-model: 'claude-sonnet-4.5'
-infer: true
+model: ['claude-sonnet-4.5', 'GPT-4o']
+user-invokable: true
+agents: ['*']
 target: 'vscode'
 handoffs:
   - label: 'プロンプトを実行'
@@ -115,13 +137,32 @@ handoffs:
 
 **作成場所**: `.github/instructions/`
 
-**必須要素**:
-- Markdown front matter（YAML）
-- `description`: インストラクションの説明（シングルクォート）
+**Front matter フィールド**:
 
-**オプション要素**:
-- `name`: UI表示名（未指定時はファイル名）
-- `applyTo`: 適用対象ファイルパターン（globパターン）。未指定時は手動追加のみ
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `description` | いいえ | インストラクションの説明（シングルクォート） |
+| `name` | いいえ | UI表示名（未指定時はファイル名） |
+| `applyTo` | いいえ | 適用対象ファイルパターン（globパターン）。未指定時はセマンティックマッチングまたは手動追加 |
+
+**インストラクションの種類**:
+
+| 種類 | ファイル | 適用方法 |
+|------|---------|---------|
+| ファイルベース | `.instructions.md` | `applyTo` globパターンまたはセマンティックマッチング |
+| プロジェクト全体 | `.github/copilot-instructions.md` | すべてのチャットリクエストに自動適用 |
+| AGENTS.md | `AGENTS.md`（ワークスペースルート） | 常時オン。複数AIエージェントで認識 |
+| 組織レベル | GitHub組織設定 | `github.copilot.chat.organizationInstructions.enabled` で有効化 |
+
+**優先順位**（高→低）: 個人レベル → リポジトリレベル → 組織レベル
+
+**AGENTS.md**: ワークスペースルートに `AGENTS.md` を配置すると、Copilot・Claude等の複数AIエージェントで認識される常時オンインストラクションとして機能します。サブフォルダへのネスト配置は `chat.useNestedAgentsMdFiles` 設定（実験的機能）で有効化できます。
+
+**自動生成**: `/init` コマンドまたは「Generate Chat Instructions」で自動生成可能
+
+**Markdownリンク参照**: `chat.includeReferencedInstructions` 設定で、インストラクション内のMarkdownリンク先も自動取り込み可能
+
+> **非推奨**: `codeGeneration` および `testGeneration` 設定（v1.102+）は非推奨です。ファイルベースのインストラクションを使用してください。
 
 **テンプレート**: [instructions-template.md](./templates/instructions-template.md)
 
@@ -141,16 +182,24 @@ applyTo: '**/*.py, **/pyproject.toml'
 - uvでプロジェクト管理
 - 型ヒントは必須
 - Pydanticモデルで構造化出力
+
+[共通コーディング規約](./general-coding.instructions.md)
 ```
 
 ### 4. Agent Skills（SKILL.md）
 
 **用途**: ツール、スクリプト、リソースを含む専門的なワークフロー
 
-**作成場所**: `.github/skills/<skill-name>/SKILL.md`
+**作成場所**:
 
-**必須要素**:
-- Markdown front matter（YAML）
+| レベル | パス |
+|--------|------|
+| リポジトリ | `.github/skills/<skill-name>/SKILL.md` |
+| パーソナル（推奨） | `~/.copilot/skills/<skill-name>/SKILL.md` |
+| パーソナル（レガシー） | `~/.claude/skills/<skill-name>/SKILL.md` |
+| カスタム | `chat.agentSkillsLocations` 設定で任意のパスを指定 |
+
+**必須Front matter**:
 - `name`: スキル名（小文字、ハイフン区切り、最大64文字）
 - `description`: スキルの説明（最大1024文字）
 
@@ -164,23 +213,61 @@ applyTo: '**/*.py, **/pyproject.toml'
       └── scripts/          # 実行スクリプト
 ```
 
+**3段階ローディング**:
+1. **スキル検出**: `name` と `description` のみ読み込み
+2. **インストラクションロード**: リクエストに関連する場合、SKILL.md本文をロード
+3. **リソースアクセス**: 参照されたファイルをオンデマンドでロード
+
 **テンプレート**: [skill-template.md](./templates/skill-template.md)
+
+## ビルトインツール一覧
+
+プロンプト・エージェントで使用可能なビルトインツール:
+
+| ツール名 | 説明 |
+|---------|------|
+| `codebase` | ワークスペースのコードを検索・分析 |
+| `search` | ファイル・コード検索 |
+| `editFiles` | ファイル編集 |
+| `terminalCommand` | ターミナルコマンド実行 |
+| `terminalLastCommand` | 直前のターミナルコマンド参照 |
+| `fetch` | Webコンテンツ取得 |
+| `githubRepo` | GitHubリポジトリアクセス |
+| `problems` | ワークスペースの診断・問題表示 |
+| `changes` | ファイル変更の確認 |
+| `usages` | シンボルの参照箇所検索 |
+
+**MCPツール**: `<server-name>/*` 形式でMCPサーバーの全ツールを指定可能
+
+```yaml
+tools: ['codebase', 'my-mcp-server/*']
+```
+
+**ツールセット**: `.jsonc` ファイルでツールをグループ定義可能
+
+```json
+{
+  "reader": {
+    "tools": ["changes", "codebase", "problems", "usages"],
+    "description": "コード分析用ツールセット",
+    "icon": "book"
+  }
+}
+```
+
+**ツール参照構文**: プロンプト本文内で `#tool:<tool-name>` を使用してツールを明示的に参照
 
 ## ベストプラクティス
 
 ### 命名規約
 
 **ファイル名**: 小文字、ハイフン区切り
-- ✅ `generate-mcp-server.prompt.md`
-- ✅ `python-best-practices.instructions.md`
-- ❌ `GenerateMCP.prompt.md`
-- ❌ `python_instructions.md`
+- `generate-mcp-server.prompt.md`
+- `python-best-practices.instructions.md`
 
 **スキル名**: 小文字、ハイフン区切り、最大64文字
-- ✅ `python-mcp-development`
-- ✅ `cpp14-code-review`
-- ❌ `PythonMCPDev`
-- ❌ `python_mcp_development`
+- `python-mcp-development`
+- `cpp14-code-review`
 
 ### Description フィールド
 
@@ -200,27 +287,24 @@ description: 'Guide for building MCP servers using Python SDK. Use this when cre
 description: "Python MCP"  # ダブルクォート、詳細不足
 ```
 
-### Tools 指定（推奨）
+### Model 指定（推奨）
 
-プロンプト・エージェントで使用するツールを明示:
-
-```yaml
-tools: ['codebase', 'terminalCommand', 'editFiles', 'search']
-```
-
-MCPサーバーのツールを含める場合は `<server name>/*` 形式を使用:
-
-```yaml
-tools: ['codebase', 'my-mcp-server/*']
-```
-
-### Model 指定（強く推奨）
-
-最適化されているモデルを指定:
-
+単一モデル:
 ```yaml
 model: 'claude-sonnet-4.5'
 ```
+
+優先順位付きフォールバック（エージェント）:
+```yaml
+model: ['Claude Opus 4.5', 'GPT-4o']
+```
+
+### 非推奨フィールドの移行
+
+| 旧フィールド | 新フィールド | 説明 |
+|-------------|-------------|------|
+| `infer: true` | `user-invokable: true` + `disable-model-invocation: false` | デフォルト動作 |
+| `infer: false` | `user-invokable: false` + `disable-model-invocation: true` | 非表示・呼び出し不可 |
 
 ## 段階的作成ワークフロー
 
@@ -241,6 +325,7 @@ model: 'claude-sonnet-4.5'
 | `.prompt.md` | 単発の質問・タスク |
 | `.agent.md` | 複雑な自律タスク |
 | `.instructions.md` | ファイル別のコーディング規約 |
+| `AGENTS.md` | 常時オンの全体ルール（複数AIエージェント対応） |
 | `SKILL.md` | スクリプト・リソースを含む専門ワークフロー |
 
 ### ステップ3: テンプレート使用
@@ -253,14 +338,17 @@ model: 'claude-sonnet-4.5'
 - [ ] 必須フィールドが存在（`description`など）
 - [ ] ファイル名が命名規約に準拠
 - [ ] `applyTo`（インストラクション）が正しいglobパターン
+- [ ] 非推奨フィールド（`infer`）を使用していない
 - [ ] 説明が具体的で有用
 
 ### ステップ5: テスト
 
-- プロンプト: VS Code Copilot Chatで`#<prompt-name>`を実行
-- エージェント: `@<agent-name>`で呼び出し
-- インストラクション: 対象ファイルで動作確認
+- プロンプト: VS Code Copilot Chatで `/`（スラッシュコマンド）を実行
+- エージェント: ドロップダウンから選択して呼び出し
+- インストラクション: 対象ファイルで動作確認（診断ビューで確認可能）
 - スキル: Copilot Chatが自動的にスキルを提案することを確認
+
+> **診断方法**: チャットビューで右クリック → 「Diagnostics」を選択して、読み込まれたインストラクションを確認
 
 ## 実装例
 
@@ -293,12 +381,13 @@ model: 'claude-sonnet-4.5'
 
 ### 問題2: プロンプトが認識されない
 
-**症状**: `#<prompt-name>`で呼び出せない
+**症状**: `/`（スラッシュコマンド）で呼び出せない
 
 **解決策**:
 - ファイル名が`.prompt.md`で終わるか確認
 - `.github/prompts/`ディレクトリに配置
 - VS Code を再読み込み
+- `chat.promptFilesLocations` 設定でカスタムパスを追加している場合はパスを確認
 
 ### 問題3: インストラクションが適用されない
 
@@ -307,6 +396,31 @@ model: 'claude-sonnet-4.5'
 **解決策**:
 - `applyTo`のglobパターンを確認（`'**/*.py'`など）
 - 複数パターンはカンマ区切り: `'**/*.ts, **/*.js'`
+- チャットビューで右クリック → 「Diagnostics」で読み込み状況を確認
+- インラインサジェスト（入力補完）にはインストラクションは適用されないことに注意
+
+### 問題4: infer フィールドが動作しない
+
+**症状**: `infer` フィールドを設定しても期待通りに動作しない
+
+**解決策**:
+`infer` は非推奨です。以下の2つのフィールドに移行してください:
+- `user-invokable`: ドロップダウン表示の制御（デフォルト: `true`）
+- `disable-model-invocation`: サブエージェントとしての自動呼び出し無効化（デフォルト: `false`）
+
+## 関連設定
+
+| 設定 | 説明 |
+|------|------|
+| `chat.promptFilesLocations` | プロンプトファイルの追加検索パス |
+| `chat.agentFilesLocations` | エージェントファイルの追加検索パス |
+| `chat.instructionsFilesLocations` | インストラクションファイルの追加検索パス |
+| `chat.agentSkillsLocations` | スキルファイルの追加検索パス |
+| `chat.useAgentsMdFile` | AGENTS.md サポートの有効化 |
+| `chat.useNestedAgentsMdFiles` | ネストされたAGENTS.md（実験的） |
+| `chat.includeReferencedInstructions` | Markdownリンク参照インストラクションの取り込み |
+| `chat.promptFilesRecommendations` | プロンプト推奨表示 |
+| `github.copilot.chat.organizationInstructions.enabled` | 組織レベルインストラクション |
 
 ## 参考リソース
 
@@ -314,7 +428,7 @@ model: 'claude-sonnet-4.5'
 - [VS Code カスタムエージェント](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 - [VS Code カスタムインストラクション](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)
 - [VS Code Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
-- [Agent Skills 仕様](https://agentskills.io/)
+- [VS Code Agent Tools](https://code.visualstudio.com/docs/copilot/agents/agent-tools)
 - [Awesome Copilot](https://github.com/github/awesome-copilot)
 - [テンプレート集](./templates/)
 
@@ -323,9 +437,5 @@ model: 'claude-sonnet-4.5'
 1. [テンプレート](./templates/)から開始
 2. 要件に応じてカスタマイズ
 3. `.github/`配下の適切なディレクトリに配置
-4. VS Code Copilot Chatでテスト
+4. VS Code Copilot Chatでテスト（診断ビューで確認）
 5. チーム・コミュニティと共有
-
----
-
-**カスタマイゼーションファイル作成のサポートが必要な場合は、関連エージェント `generate-customization-md` を使用してください。**

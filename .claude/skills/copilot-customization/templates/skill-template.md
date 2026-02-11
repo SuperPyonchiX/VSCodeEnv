@@ -1,6 +1,6 @@
 ---
 name: skill-name
-description: Detailed description of what this skill does and when to use it. Be specific about both capabilities and use cases to help Copilot decide when to load the skill. (最大1024文字)
+description: 'Detailed description of what this skill does and when to use it. Be specific about both capabilities and use cases to help Copilot decide when to load the skill. (最大1024文字)'
 ---
 
 # スキルタイトル
@@ -52,10 +52,12 @@ description: Detailed description of what this skill does and when to use it. Be
 ## トラブルシューティング
 
 ### 問題1
+
 **症状**: 問題の説明
 **解決策**: 解決方法
 
 ### 問題2
+
 **症状**: 問題の説明
 **解決策**: 解決方法
 
