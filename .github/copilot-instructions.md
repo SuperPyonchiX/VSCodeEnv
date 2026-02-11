@@ -19,6 +19,12 @@
 ├── instructions/     # ファイルタイプ別自動適用ルール
 ├── prompts/          # タスク実行レシピ
 ├── skills/           # Agent Skills（リソース付きワークフロー）
+│   ├── copilot-customization/
+│   ├── cpp14-code-review/
+│   ├── markdown-explanation-doc/
+│   ├── markdown-procedure-doc/
+│   ├── python-mcp-development/
+│   └── typescript-mcp-development/
 └── copilot-instructions.md  # このファイル（リポジトリ全体の指示）
 ```
 
@@ -30,54 +36,11 @@
 
 * [ ] 新しいファイルは `README.md` に追加する必要があります。
 
-## プロンプトファイルガイド
-
-**`.prompt.md` で終わるファイルにのみ適用**
-
-* [ ] プロンプトに markdown front matter が含まれていること。
-* [ ] プロンプトに `description` フィールドがあること。
-* [ ] `description` フィールドが空でないこと。
-* [ ] `description` フィールドの値がシングルクォートで囲まれていること。
-* [ ] ファイル名が小文字で、単語がハイフンで区切られていること。
-* [ ] オプション: `agent` フィールドで実行エージェントを指定すること（`ask`、`edit`、`agent`、またはカスタムエージェント名）。未指定時は現在のエージェントを使用。
-* [ ] オプション: `name` フィールドでチャットUI上の表示名を指定すること。未指定時はファイル名を使用。
-* [ ] オプション: `argument-hint` フィールドでチャット入力欄に表示するヒントを指定すること。
-* [ ] `tools` の使用を推奨すること（必須ではない）。
-* [ ] プロンプトが最適化されているモデルを指定するために `model` の使用を強く推奨すること。
-
-## インストラクションファイルガイド
-
-**`.instructions.md` で終わるファイルにのみ適用**
-
-* [ ] インストラクションに markdown front matter が含まれていること。
-* [ ] インストラクションに `description` フィールドがあること。
-* [ ] `description` フィールドが空でないこと。
-* [ ] `description` フィールドの値がシングルクォートで囲まれていること。
-* [ ] ファイル名が小文字で、単語がハイフンで区切られていること。
-* [ ] インストラクションが適用されるファイルを指定する `applyTo` フィールドがあること。複数のファイルパスを指定する場合は `'**/*.js, **/*.ts'` のような形式にすること。
-* [ ] オプション: `name` フィールドでUI上の表示名を指定すること。未指定時はファイル名を使用。
-
-## エージェントファイルガイド
-
-**`.agent.md` で終わるファイルにのみ適用**
-
-* [ ] エージェントに markdown front matter が含まれていること。
-* [ ] エージェントに `description` フィールドがあること。
-* [ ] `description` フィールドが空でないこと。
-* [ ] `description` フィールドの値がシングルクォートで囲まれていること。
-* [ ] ファイル名が小文字で、単語がハイフンで区切られていること。
-* [ ] オプション: `name` フィールドでUI上の表示名を指定すること。未指定時はファイル名を使用。
-* [ ] オプション: `infer` フィールドでサブエージェントとしての使用を制御すること（デフォルト: true）。
-* [ ] オプション: `target` フィールドで対象環境を指定すること（`vscode` または `github-copilot`）。
-* [ ] オプション: `mcp-servers` フィールドでMCPサーバー設定（JSON形式）を指定すること。
-* [ ] オプション: `handoffs` フィールドでエージェント間の遷移を定義すること。
-* [ ] `tools` の使用を推奨すること（必須ではない）。
-* [ ] エージェントが最適化されているモデルを指定するために `model` の使用を強く推奨すること。
-
 ## 参考資料
 - [VS Code プロンプトファイル](https://code.visualstudio.com/docs/copilot/customization/prompt-files)
 - [VS Code インストラクションファイル](https://code.visualstudio.com/docs/copilot/customization/custom-instructions)
 - [VS Code カスタムエージェントファイル](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 - [VS Code Agent Skills ドキュメント](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
+- [Agent Skills 仕様](https://agentskills.io/)
 - [Awesome Copilot リポジトリ](https://github.com/github/awesome-copilot) (コミュニティ貢献の例)
 - [AGENTS.md 公式サイト](https://agents.md/)
